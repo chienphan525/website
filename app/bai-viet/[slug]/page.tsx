@@ -1,5 +1,0 @@
-import Link from "next/link";
-import { notFound } from "next/navigation";
-import { getAllPosts,getPost } from "@/lib/posts";
-export function generateStaticParams(){return getAllPosts().map(({slug})=>({slug}));}
-export default async function PostPage({params}:{params:Promise<{slug:string}>}){const {slug}=await params;const post=getPost(slug);if(!post)notFound();return <main className="article-page"><nav className="article-nav"><Link className="brand" href="/">CHIẾN PHAN</Link><Link href="/">← Trở về nhật ký</Link></nav><article className="article"><p className="eyebrow">{post.category} · {post.date}</p><h1>{post.title}</h1><p className="article-lead">{post.excerpt}</p><div className="article-rule"/><div className="prose">{post.content.split("\n\n").map((paragraph,index)=>paragraph.startsWith("## ")?<h2 key={index}>{paragraph.slice(3)}</h2>:<p key={index}>{paragraph}</p>)}</div></article><footer><Link className="brand" href="/">CHIẾN PHAN</Link><p>© {new Date().getFullYear()} · Chạm là tan</p></footer></main>}
