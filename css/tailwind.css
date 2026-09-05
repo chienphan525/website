@@ -1,0 +1,280 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --cp-gold: #d4a931;
+}
+
+.cp-hero {
+  position: relative;
+  min-height: min(620px, 72vh);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: center / cover url('/static/chienphan/hero.jpg');
+}
+.cp-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(10, 12, 18, 0.72), rgba(10, 12, 18, 0.25)), rgba(0, 0, 0, 0.2);
+}
+.cp-hero-copy {
+  position: relative;
+  max-width: 58rem;
+  padding: 3rem 1.25rem;
+  text-align: center;
+  color: white;
+}
+.cp-hero h1 {
+  margin: 0.55rem 0 1.25rem;
+  font-family: Georgia, serif;
+  font-size: clamp(2.6rem, 6vw, 5.5rem);
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.05;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.45);
+}
+.cp-hero-copy > p:last-child {
+  max-width: 38rem;
+  margin: auto;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.85);
+}
+.cp-kicker {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.24em;
+}
+.cp-card {
+  overflow: hidden;
+  border: 1px solid #e7e2d9;
+  background: #fff;
+  box-shadow: 0 8px 35px rgba(60, 45, 20, 0.06);
+}
+.cp-card-placeholder {
+  background: linear-gradient(135deg, #473b2d, #b69547);
+}
+.cp-link {
+  color: #a57611;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.cp-link:hover {
+  color: #73500a;
+}
+
+.cp-prose {
+  color: #3d3b37;
+  font-size: 1.08rem;
+  line-height: 1.9;
+}
+.cp-prose > :first-child {
+  margin-top: 0;
+}
+.cp-prose > p:first-child > img {
+  width: calc(100% + 5rem);
+  max-width: none;
+  margin: -1rem -2.5rem 3rem;
+  border-radius: 0.25rem;
+  box-shadow: 0 16px 40px rgba(42, 31, 12, 0.16);
+}
+.cp-prose h2 {
+  margin-top: 3rem;
+  color: #29251e;
+  font-family: Georgia, serif;
+  font-size: 2rem;
+  line-height: 1.2;
+}
+.cp-prose h3 {
+  margin-top: 2.25rem;
+  color: #29251e;
+  font-family: Georgia, serif;
+  font-size: 1.5rem;
+}
+.cp-prose p {
+  margin: 1.5rem 0;
+}
+.cp-prose ul,
+.cp-prose ol {
+  padding-left: 1.5rem;
+}
+.cp-prose li {
+  margin: 0.45rem 0;
+  padding-left: 0.3rem;
+}
+.cp-prose a {
+  color: #9a6b0b;
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: #d6b35a;
+  text-underline-offset: 3px;
+}
+.cp-prose img {
+  border-radius: 0.25rem;
+}
+.cp-post-nav {
+  display: flex;
+  min-height: 5.5rem;
+  flex-direction: column;
+  justify-content: center;
+  border: 1px solid #e4ded3;
+  padding: 1.1rem 1.25rem;
+  color: #38332a;
+  font-family: Georgia, serif;
+  font-size: 1.05rem;
+  line-height: 1.3;
+  transition: background 0.2s;
+}
+.cp-post-nav:hover {
+  background: #f4efe5;
+  color: #8b620e;
+}
+.cp-post-nav span {
+  margin-bottom: 0.45rem;
+  color: #a57611;
+  font-family: var(--font-space-grotesk), sans-serif;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+@media (max-width: 640px) {
+  .cp-prose {
+    font-size: 1rem;
+  }
+  .cp-prose > p:first-child > img {
+    width: calc(100% + 2.5rem);
+    margin: -1rem -1.25rem 2rem;
+  }
+}
+
+.admin-label {
+  display: block;
+  color: #49443b;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+.admin-input {
+  display: block;
+  width: 100%;
+  margin-top: 0.45rem;
+  border: 1px solid #d9d2c6;
+  background: #fffdf9;
+  padding: 0.65rem 0.75rem;
+  color: #29251e;
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: normal;
+}
+.admin-input:focus {
+  border-color: #b7871d;
+  outline: 2px solid #f4dfa8;
+}
+.admin-button {
+  background: #a57611;
+  padding: 0.75rem 1.2rem;
+  color: white;
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.admin-button:hover {
+  background: #795207;
+}
+
+.task-list-item::before {
+  @apply hidden;
+}
+
+.task-list-item {
+  @apply list-none;
+}
+
+.footnotes {
+  @apply mt-12 border-t border-gray-200 pt-8 dark:border-gray-700;
+}
+
+.data-footnote-backref {
+  @apply no-underline;
+}
+
+.csl-entry {
+  @apply my-5;
+}
+
+/* https://stackoverflow.com/questions/61083813/how-to-avoid-internal-autofill-selected-style-to-be-applied */
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+  transition:
+    background-color 600000s 0s,
+    color 600000s 0s;
+}
+
+.katex-display {
+  overflow: auto hidden;
+}
+
+.prose :where(pre):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
+  @apply dark:bg-gray-900;
+}
+
+/* Scroll-reveal: elements start hidden only when motion is allowed, so
+   reduced-motion users and non-JS visitors always see content immediately. */
+/* Delight keyframes: referenced via Tailwind arbitrary animate values, so they
+   only run where a hover explicitly asks for them. */
+@keyframes star-wiggle {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-14deg);
+  }
+  75% {
+    transform: rotate(14deg);
+  }
+}
+
+@keyframes pac-chomp {
+  0%,
+  100% {
+    clip-path: polygon(100% 74%, 44% 48%, 100% 21%, 100% 0%, 0% 0%, 0% 100%, 100% 100%);
+  }
+  50% {
+    clip-path: polygon(100% 60%, 44% 48%, 100% 40%, 100% 0%, 0% 0%, 0% 100%, 100% 100%);
+  }
+}
+
+@keyframes pac-dot-eaten {
+  0%,
+  40% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition:
+      opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}

@@ -1,0 +1,20 @@
+import { MetadataRoute } from 'next'
+import siteMetadata from '@/data/siteMetadata'
+
+export default function robots(): MetadataRoute.Robots {
+  return {
+    rules: [
+      {
+        userAgent: 'GPTBot',
+        disallow: '/',
+        allow: '/feed.xml',
+      },
+      {
+        userAgent: '*',
+        allow: '/',
+      },
+    ],
+    sitemap: `${siteMetadata.siteUrl}/sitemap.xml`,
+    host: siteMetadata.siteUrl,
+  }
+}
