@@ -97,8 +97,10 @@ export default function AdminEditor({ initialSlug }: { initialSlug?: string }) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ slug: post.slug, content: toMdx(post) }),
     })
-    if (!response.ok)
-      return setStatus('Không thể lưu. Vui lòng kiểm tra cấu hình GitHub trên Vercel.')
+    if (!response.ok) {
+      const error = await response.json().catch(() => ({}))
+      return setStatus(error.error || 'Không thể lưu bài viết.')
+    }
     setStatus('Đã lưu. Vercel sẽ tự xuất bản thay đổi trong ít phút.')
     if (!initialSlug) router.replace('/admin/posts/' + post.slug)
   }
@@ -130,7 +132,6 @@ export default function AdminEditor({ initialSlug }: { initialSlug?: string }) {
           Đường dẫn bài viết
           <input
             required
-            pattern="[a-z0-9-]+"
             className="admin-input"
             value={post.slug}
             disabled={Boolean(initialSlug)}
