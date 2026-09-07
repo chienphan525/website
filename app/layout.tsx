@@ -1,7 +1,7 @@
 import 'css/tailwind.css'
 import 'pliny/search/algolia.css'
 
-import { Space_Grotesk } from 'next/font/google'
+import { Be_Vietnam_Pro } from 'next/font/google'
 import { Analytics, AnalyticsConfig } from 'pliny/analytics'
 import { SearchProvider, SearchConfig } from 'pliny/search'
 import Header from '@/components/Header'
@@ -13,10 +13,11 @@ import { Metadata } from 'next'
 import { Analytics as VercelAnalytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 
-const space_grotesk = Space_Grotesk({
-  subsets: ['latin'],
+const be_vietnam_pro = Be_Vietnam_Pro({
+  subsets: ['vietnamese', 'latin'],
   display: 'swap',
-  variable: '--font-space-grotesk',
+  variable: '--font-be-vietnam-pro',
+  weight: ['400', '500', '600', '700', '800'],
 })
 
 export const metadata: Metadata = {
@@ -63,7 +64,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang={siteMetadata.language}
-      className={`${space_grotesk.variable} scroll-smooth`}
+      className={`${be_vietnam_pro.variable} scroll-smooth`}
       suppressHydrationWarning
     >
       {/*<link rel="apple-touch-icon" sizes="76x76" href="/static/favicons/apple-touch-icon.png"/>*/}
