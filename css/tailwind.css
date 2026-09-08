@@ -189,6 +189,33 @@
   background: #795207;
 }
 
+.video-filter {
+  color: #575046;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.video-filter input,
+.video-filter select {
+  display: block;
+  width: 100%;
+  margin-top: 0.45rem;
+  border: 1px solid #d9d2c6;
+  background: #fffdf9;
+  color: #29251e;
+  font-size: 0.95rem;
+  font-weight: 400;
+  letter-spacing: normal;
+  text-transform: none;
+}
+.video-filter input {
+  padding: 0.62rem 0.72rem;
+}
+.video-filter select {
+  padding: 0.62rem 2rem 0.62rem 0.72rem;
+}
+
 .task-list-item::before {
   @apply hidden;
 }
