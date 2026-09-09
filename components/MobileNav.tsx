@@ -27,6 +27,7 @@ const MobileNav = () => {
           viewBox="0 0 20 20"
           fill="currentColor"
           className="h-8 w-8 text-gray-900 dark:text-gray-100"
+          style={{ marginBottom: '-6px' }}
         >
           <path
             fillRule="evenodd"
