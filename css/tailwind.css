@@ -339,3 +339,7 @@ body::-webkit-scrollbar-thumb {
 body::-webkit-scrollbar {
   width: 8px;
 }
+
+.cp-post .cp-prose > p:first-child {
+  display: none;
+}
