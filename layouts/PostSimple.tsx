@@ -21,14 +21,14 @@ export default function PostSimple({ content, next, prev, children }: LayoutProp
     <article className="cp-post">
       <ScrollTopAndComment />
       <header className="relative h-[50vh] min-h-[420px] overflow-hidden">
-      {content.images && content.images.length > 0 && (
-        <img
-          src={content.images[0]}
-          alt={title}
-          className="absolute inset-0 h-full w-full object-cover"
-        />
-      )}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-black/10" />
+        {content.images && content.images.length > 0 && (
+          <img
+            src={content.images[0]}
+            alt={title}
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+        )}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-black/10" />
         <div className="relative z-10 mx-auto flex h-full max-w-4xl flex-col justify-end px-5 pb-12 text-left text-white sm:px-8 sm:pb-16">
           <Link href="/blog" className="text-sm text-white/80 hover:text-white">
             ← Tất cả bài viết
