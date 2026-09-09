@@ -40,9 +40,8 @@ const MobileNav = () => {
       {/* Menu mở */}
       <div
         className={`fixed left-0 top-0 z-50 w-full shadow-2xl transition-all duration-500 ease-out ${
-          navShow
-            ? 'scale-100 opacity-100'
-            : 'pointer-events-none scale-0 opacity-0'
+          navShow ? 'scale-100 opacity-100'
+           : 'pointer-events-none scale-0 opacity-0'
         }`}
         style={{
           height: '50vh',
