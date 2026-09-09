@@ -20,7 +20,7 @@ export default function PostSimple({ content, next, prev, children }: LayoutProp
   return (
     <article className="cp-post">
       <ScrollTopAndComment />
-      <header className="relative h-[75vh] min-h-[420px] overflow-hidden">
+      <header className="relative h-[70vh] min-h-[420px] overflow-hidden">
         {content.images && content.images.length > 0 && (
           <img
             src={content.images[0]}
