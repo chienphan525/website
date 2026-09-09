@@ -185,6 +185,31 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
+
+.admin-editor-button {
+  @apply rounded border border-stone-300 bg-white px-3 py-1.5 text-sm font-semibold text-stone-700 transition hover:border-stone-500 hover:bg-stone-100;
+}
+
+.admin-rich-editor {
+  @apply text-base leading-7 text-stone-800;
+}
+
+.admin-rich-editor:empty::before {
+  content: attr(data-placeholder);
+  @apply pointer-events-none text-stone-400;
+}
+
+.admin-rich-editor h2 {
+  @apply mb-3 mt-7 text-2xl font-bold;
+}
+
+.admin-rich-editor ul {
+  @apply my-4 list-disc pl-6;
+}
+
+.admin-rich-editor a {
+  @apply text-primary-600 underline;
+}
 .admin-button:hover {
   background: #795207;
 }
