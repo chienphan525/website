@@ -20,6 +20,12 @@ export default function PostSimple({ content, next, prev, children }: LayoutProp
   return (
     <article className="cp-post">
       <ScrollTopAndComment />
+        <div className="relative h-[50vh] w-full overflow-hidden">
+        {content.images && content.images.length > 0 && (
+          <img src={content.images[0]} alt={title} className="h-full w-full object-cover" />
+        )}
+        <div className="absolute inset-0 bg-black/30" />
+      </div>
       <header className="border-b border-stone-200 bg-[#f1ece2]">
         <div className="mx-auto max-w-4xl px-5 py-14 text-center sm:px-8 sm:py-20">
           <Link href="/blog" className="cp-link">
