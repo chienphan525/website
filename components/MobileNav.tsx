@@ -46,7 +46,7 @@ const MobileNav = () => {
           height: '50vh',
           backgroundColor: '#00000088',
           borderBottomLeftRadius: '100% 75%',
-          transformOrigin: 'top right',
+          transformOrigin: 'calc(100% - 36px) 18px',
         }}
       >
         {/* Nút X - đúng vị trí nút menu */}
