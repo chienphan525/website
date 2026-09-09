@@ -46,9 +46,7 @@ export default function PostSimple({ content, next, prev, children }: LayoutProp
       </header>
 
       <div className="mx-auto max-w-3xl px-5 pb-16 pt-10 sm:px-8 sm:pb-24 sm:pt-14">
-        <div className="cp-prose prose max-w-none">
-          {children}
-        </div>
+        <div className="cp-prose prose max-w-none"> {children} </div>
 
         <div className="mt-14 border-y border-stone-200 py-7">
           <p className="font-serif text-2xl text-stone-900">Chạm là Tan</p>
