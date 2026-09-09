@@ -335,3 +335,7 @@ body::-webkit-scrollbar-thumb {
   background-image: linear-gradient(135deg, #ffd700, #ffd700);
   border-radius: 50px;
 }
+
+body::-webkit-scrollbar {
+  width: 8px;
+}
