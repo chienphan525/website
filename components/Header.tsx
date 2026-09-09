@@ -3,7 +3,7 @@ import MobileNav from './MobileNav'
 
 export default function Header() {
   return (
-    <header className="cp-header fixed left-0 right-0 top-0 z-50 bg-black/70">
+    <header className="cp-header fixed left-0 right-0 top-0 z-50 bg-black/60">
       <div className="flex items-center justify-between px-5 py-4 sm:px-3">
         <Link href="/" aria-label="Chiến Phan">
           <img src="/static/chienphan/logo.png" alt="Chiến Phan" className="h-10 w-auto sm:h-12" />
