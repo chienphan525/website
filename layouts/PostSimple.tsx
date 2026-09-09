@@ -46,7 +46,7 @@ export default function PostSimple({ content, next, prev, children }: LayoutProp
       </header>
 
       <div className="mx-auto max-w-3xl px-5 pb-16 pt-10 sm:px-8 sm:pb-24 sm:pt-14">
-        <div className="cp-prose prose max-w-none [&>img:first-child]:hidden [&>p:first-child:has(>img)]:hidden">
+        <div className="cp-prose prose max-w-none">
           {children}
         </div>
 
