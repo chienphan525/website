@@ -1,6 +1,6 @@
 'use client'
 
-import { FormEvent, useEffect, useState } from 'react'
+import { FormEvent, useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 
 type PostForm = {
@@ -21,6 +21,130 @@ const blank: PostForm = {
   summary: '',
   image: '',
   body: '',
+}
+
+const exampleArticle = `## Tiêu đề phần đầu
+
+Viết đoạn mở đầu của bài viết ở đây. Hãy giải thích ngắn gọn điều người đọc sẽ nhận được.
+
+## Nội dung chính
+
+Bạn có thể dùng **chữ đậm**, *chữ nghiêng* và [một liên kết](https://example.com).
+
+- Ý quan trọng thứ nhất
+- Ý quan trọng thứ hai
+
+## Kết luận
+
+Tóm tắt ý chính và đưa ra lời khuyên cuối bài.`
+
+function markdownToEditorHtml(markdown: string) {
+  if (/<\/?[a-z][\s\S]*>/i.test(markdown)) return markdown
+
+  const inline = (text: string) =>
+    text
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/\[([^\]]+)]\((https?:\/\/[^)\s]+)\)/g, '<a href="$2">$1</a>')
+      .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*([^*]+)\*/g, '<em>$1</em>')
+
+  return markdown
+    .trim()
+    .split(/\n{2,}/)
+    .map((block) => {
+      const heading = block.match(/^(#{2,4})\s+(.+)$/)
+      if (heading) return `<h${heading[1].length}>${inline(heading[2])}</h${heading[1].length}>`
+      if (/^(?:- |\* )/m.test(block)) {
+        return `<ul>${block
+          .split('\n')
+          .filter((line) => /^(?:- |\* )/.test(line))
+          .map((line) => `<li>${inline(line.replace(/^(?:- |\* )/, ''))}</li>`)
+          .join('')}</ul>`
+      }
+      return `<p>${inline(block).replace(/\n/g, '<br>')}</p>`
+    })
+    .join('')
+}
+
+function RichTextEditor({
+  content,
+  onChange,
+}: {
+  content: string
+  onChange: (value: string) => void
+}) {
+  const editor = useRef<HTMLDivElement>(null)
+  const lastEmitted = useRef('')
+
+  useEffect(() => {
+    if (editor.current && content !== lastEmitted.current) {
+      editor.current.innerHTML = markdownToEditorHtml(content)
+      lastEmitted.current = content
+    }
+  }, [content])
+
+  const command = (name: string, commandValue?: string) => {
+    editor.current?.focus()
+    document.execCommand(name, false, commandValue)
+    if (editor.current) {
+      lastEmitted.current = editor.current.innerHTML
+      onChange(editor.current.innerHTML)
+    }
+  }
+
+  const addLink = () => {
+    const url = window.prompt('Dán đường dẫn đầy đủ (https://…)')
+    if (url) command('createLink', url)
+  }
+
+  return (
+    <div className="overflow-hidden rounded border border-stone-300 bg-white">
+      <div className="flex flex-wrap gap-2 border-b border-stone-200 bg-stone-50 p-2">
+        <button type="button" className="admin-editor-button" onClick={() => command('bold')}>
+          Đậm
+        </button>
+        <button
+          type="button"
+          className="admin-editor-button italic"
+          onClick={() => command('italic')}
+        >
+          Nghiêng
+        </button>
+        <button
+          type="button"
+          className="admin-editor-button"
+          onClick={() => command('formatBlock', 'h2')}
+        >
+          Tiêu đề
+        </button>
+        <button
+          type="button"
+          className="admin-editor-button"
+          onClick={() => command('insertUnorderedList')}
+        >
+          Danh sách
+        </button>
+        <button type="button" className="admin-editor-button" onClick={addLink}>
+          Thêm liên kết
+        </button>
+      </div>
+      <div
+        ref={editor}
+        contentEditable
+        role="textbox"
+        aria-multiline="true"
+        data-placeholder="Viết nội dung bài viết ở đây…"
+        className="admin-rich-editor min-h-[28rem] p-4 outline-none"
+        onInput={() => {
+          if (!editor.current) return
+          lastEmitted.current = editor.current.innerHTML
+          onChange(editor.current.innerHTML)
+        }}
+      />
+    </div>
+  )
 }
 
 function value(source: string, field: string) {
@@ -73,6 +197,7 @@ export default function AdminEditor({ initialSlug }: { initialSlug?: string }) {
   const router = useRouter()
   const [post, setPost] = useState<PostForm>(blank)
   const [status, setStatus] = useState('')
+  const [editorMode, setEditorMode] = useState<'rich' | 'markdown'>('rich')
 
   useEffect(() => {
     if (!initialSlug) return
@@ -180,15 +305,49 @@ export default function AdminEditor({ initialSlug }: { initialSlug?: string }) {
       </label>
       <label className="admin-label">
         Nội dung bài viết
-        <textarea
-          required
-          className="admin-input min-h-[28rem]"
-          value={post.body}
-          onChange={(e) => update('body', e.target.value)}
-          placeholder={
-            'Viết nội dung tại đây.\n\nDùng một dòng trống để tách đoạn.\n## Tiêu đề lớn\n### Tiêu đề nhỏ'
-          }
-        />
+        <div className="mt-2 flex flex-wrap items-center gap-2">
+          <button
+            type="button"
+            onClick={() => setEditorMode('rich')}
+            className={`admin-editor-button ${editorMode === 'rich' ? 'bg-stone-900 text-white' : ''}`}
+          >
+            Trình soạn thảo
+          </button>
+          <button
+            type="button"
+            onClick={() => setEditorMode('markdown')}
+            className={`admin-editor-button ${editorMode === 'markdown' ? 'bg-stone-900 text-white' : ''}`}
+          >
+            Markdown
+          </button>
+          {editorMode === 'markdown' && (
+            <button
+              type="button"
+              className="admin-editor-button"
+              onClick={() => update('body', exampleArticle)}
+            >
+              Nhập ví dụ
+            </button>
+          )}
+        </div>
+        <p className="mt-2 text-sm font-normal normal-case tracking-normal text-stone-500">
+          {editorMode === 'rich'
+            ? 'Dùng các nút định dạng để viết bài mà không cần biết Markdown.'
+            : 'Dành cho người quen Markdown. “Nhập ví dụ” sẽ thay nội dung hiện tại bằng một mẫu.'}
+        </p>
+        {editorMode === 'rich' ? (
+          <RichTextEditor content={post.body} onChange={(content) => update('body', content)} />
+        ) : (
+          <textarea
+            required
+            className="admin-input mt-2 min-h-[28rem] font-mono text-sm"
+            value={post.body}
+            onChange={(e) => update('body', e.target.value)}
+            placeholder={
+              'Viết nội dung tại đây.\n\nDùng một dòng trống để tách đoạn.\n## Tiêu đề lớn'
+            }
+          />
+        )}
       </label>
       <div className="flex flex-wrap gap-3">
         <button className="admin-button">Lưu bài viết</button>
