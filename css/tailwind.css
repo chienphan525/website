@@ -336,8 +336,8 @@ body::-webkit-scrollbar-thumb {
   border-radius: 50px;
 }
 
-body::-webkit-scrollbar {
-  width: 8px;
+.cp-prose img:first-child {
+  display: none;
 }
 
 .cp-post .cp-prose > p:first-child {
