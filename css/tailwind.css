@@ -330,3 +330,8 @@ input:-webkit-autofill:focus {
     transform: none;
   }
 }
+
+body::-webkit-scrollbar-thumb {
+  background-image: linear-gradient(135deg, #ffd700, #ffd700);
+  border-radius: 50px;
+}
