@@ -39,17 +39,14 @@ const MobileNav = () => {
 
       {/* Menu mở */}
       <div
-         className={`fixed left-0 top-0 z-50 w-full shadow-2xl transition-all duration-500 ease-out ${
-          navShow
-            ? 'scale-100 opacity-100'
-            : 'pointer-events-none scale-0 opacity-0'
-         }`}
-         style={{
-           height: '50vh',
-           backgroundColor: '#00000088',
-           borderBottomLeftRadius: '100% 75%',
-           transformOrigin: 'top right',
-         }}
+        className={`fixed left-0 top-0 z-50 w-full transform shadow-2xl duration-300 ease-in-out ${
+          navShow ? 'translate-x-0' : 'translate-x-full'
+        }`}
+        style={{
+          height: '50vh',
+          backgroundColor: '#00000088',
+          borderBottomLeftRadius: '100% 75%',
+        }}
       >
         {/* Nút X - đúng vị trí nút menu */}
         <button
