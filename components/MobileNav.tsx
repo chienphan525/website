@@ -71,7 +71,7 @@ const MobileNav = () => {
         </button>
 
         {/* Các mục menu */}
-        <nav className="mt-16 w-full pr-10">
+        <nav className="mt-16 w-full pr-8">
           {headerNavLinks.map((link) => (
             <div key={link.title} className="py-2 text-right">
               <Link
