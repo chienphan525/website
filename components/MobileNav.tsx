@@ -50,7 +50,8 @@ const MobileNav = () => {
       >
         {/* Nút X - đúng vị trí nút menu */}
         <button
-          className="absolute right-5 top-2 h-8 w-8"
+          className="absolute right-5 h-8 w-8"
+          style={{ top: '-2px' }}
           aria-label="Close Menu"
           onClick={onToggleNav}
         >
