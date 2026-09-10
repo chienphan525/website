@@ -68,7 +68,8 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: `GitHub upload failed: ${response.status}` }, { status: 500 })
   }
 
-  const url = `/${filename.replace(/^public\//, '')}`
+  const path = `/${filename.replace(/^public\//, '')}`
+  const url = `https://raw.githubusercontent.com/${repo}/main/${filename}`
 
-  return NextResponse.json({ path: url, url })
+  return NextResponse.json({ path, url })
 }
