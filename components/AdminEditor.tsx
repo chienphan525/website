@@ -94,6 +94,7 @@ function RichTextEditor({
   const lastEditorHtml = useRef('')
   const onChangeRef = useRef(onChange)
   const [, refreshToolbar] = useState(0)
+  const fileInputRef = useRef<HTMLInputElement>(null)
   onChangeRef.current = onChange
   const editor = useEditor({
     immediatelyRender: false,
@@ -146,9 +147,59 @@ function RichTextEditor({
   }
 
   const addImage = () => {
-    const url = window.prompt('Dán đường dẫn ảnh đầy đủ (https://…)')
-    if (url) editor.chain().focus().setImage({ src: url, alt: 'Hình minh họa' }).run()
+  const url = window.prompt('Dán đường dẫn ảnh đầy đủ (https://…)')
+  if (url) editor.chain().focus().setImage({ src: url, alt: 'Hình minh họa' }).run()
+}
+
+const uploadImage = async (file: File) => {
+  const allowedTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif']
+
+  if (!allowedTypes.includes(file.type)) {
+    window.alert('Chỉ hỗ trợ JPG, PNG, WebP hoặc GIF.')
+    return
   }
+
+  if (file.size > 5 * 1024 * 1024) {
+    window.alert('Ảnh không được vượt quá 5 MB.')
+    return
+  }
+
+  const base64 = await new Promise<string>((resolve, reject) => {
+    const reader = new FileReader()
+
+    reader.onload = () => {
+      const result = String(reader.result || '')
+      resolve(result.split(',')[1] || '')
+    }
+
+    reader.onerror = reject
+    reader.readAsDataURL(file)
+  })
+
+  const response = await fetch('/api/admin/upload-image', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      name: file.name,
+      type: file.type,
+      content: base64,
+    }),
+  })
+
+  const data = await response.json()
+
+  if (!response.ok) {
+    throw new Error(data.error || 'Không thể tải ảnh lên GitHub')
+  }
+
+  editor
+    .chain()
+    .focus()
+    .setImage({ src: data.url, alt: 'Hình minh họa' })
+    .run()
+}
 
   const setTextColor = () => {
     const color = window.prompt('Nhập mã màu, ví dụ: #b45309')
@@ -285,6 +336,13 @@ function RichTextEditor({
         </button>
         <button
           type="button"
+          className={toolClass()}
+          onClick={() => fileInputRef.current?.click()}
+        >
+          Chọn ảnh từ máy
+        </button>
+        <button
+          type="button"
           className={toolClass(editor.isActive('table'))}
           onClick={() =>
             editor.chain().focus().insertTable({ rows: 3, cols: 3, withHeaderRow: true }).run()
@@ -369,6 +427,23 @@ function RichTextEditor({
           Làm lại
         </button>
       </div>
+            <input
+        ref={fileInputRef}
+        type="file"
+        accept="image/jpeg,image/png,image/webp,image/gif"
+        className="hidden"
+        onChange={(event) => {
+          const file = event.target.files?.[0]
+          if (file) {
+            uploadImage(file).catch((error) => {
+              window.alert(
+                error instanceof Error ? error.message : 'Không thể tải ảnh lên'
+              )
+            })
+          }
+          event.target.value = ''
+        }}
+      />
       <EditorContent editor={editor} />
     </div>
   )
