@@ -45,7 +45,7 @@
 }
 .cp-hero-copy > p:last-child {
   max-width: 38rem;
-  margin: auto;
+  margin: 0;
   font-size: 1.1rem;
   line-height: 1.8;
   color: rgba(255, 255, 255, 0.85);
