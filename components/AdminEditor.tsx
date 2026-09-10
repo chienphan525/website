@@ -478,6 +478,7 @@ function toMdx(post: PostForm) {
       /<img\s+src=["']([^"']+)["']\s+alt=["']([^"']*)["']\s*\/?>/gi,
       (_, src, alt) => `![${alt || 'Hình minh họa'}](${src})`
     )
+    .replace(/<br\s*\/?>/gi, '<br />')
 
   return [
     '---',
