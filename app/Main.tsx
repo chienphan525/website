@@ -17,9 +17,8 @@ export default function Home({ posts }) {
             <span className="block">mọi áp lực sẽ Tan</span>
           </h1>
           <p>
-            <span>Những câu chuyện nhỏ về tài chính, cảm xúc</span>
-            <br className="hidden lg:block" />
-            <span>Và một cuộc sống an yên hơn.</span>
+            <span className="block">Những câu chuyện đầy cảm xúc</span>
+            <span className="block">Và một cuộc sống an yên</span>
           </p>
         </div>
       </section>
