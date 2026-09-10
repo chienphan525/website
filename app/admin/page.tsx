@@ -12,12 +12,20 @@ export default async function AdminPage() {
           <p className="cp-kicker text-primary-500">QUẢN TRỊ</p>
           <h1 className="mt-2 font-serif text-4xl">Bài viết</h1>
         </div>
+        <div className="flex gap-3">
         <Link
           href="/admin/posts/new"
           className="rounded bg-amber-500 px-4 py-2 font-bold text-stone-950"
         >
           + Thêm bài viết
         </Link>
+        <Link
+          href="/admin/links"
+          className="rounded border border-amber-500 px-4 py-2 font-bold text-amber-700"
+        >
+          Link Affiliate
+        </Link>
+        </div>
       </div>
       <p className="mt-4 text-stone-600">
         Các thay đổi được đưa lên GitHub, sau đó Vercel sẽ tự động xuất bản.
