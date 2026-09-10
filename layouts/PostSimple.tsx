@@ -38,7 +38,7 @@ export default function PostSimple({ content, next, prev, children }: LayoutProp
             <span>•</span>
             <time dateTime={date}>{formatDate(date, siteMetadata.locale)}</time>
           </div>
-          <h1 className="mt-4 max-w-4xl font-serif text-4xl font-semibold leading-tight text-white sm:text-5xl lg:text-6xl">
+          <h1 className="mt-4 max-w-4xl font-sans text-4xl font-semibold leading-tight text-white sm:text-5xl lg:text-6xl">
             {title}
           </h1>
           <p className="mt-5 text-sm text-white/80">{readingTime?.text}</p>
