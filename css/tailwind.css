@@ -38,6 +38,11 @@
   line-height: 1.05;
   text-shadow: 0 2px 24px rgba(0, 0, 0, 0.45);
 }
+@media (min-width: 1024px) {
+  .cp-hero h1 {
+    font-size: 3.75rem;
+  }
+}
 .cp-hero-copy > p:last-child {
   max-width: 38rem;
   margin: auto;
