@@ -190,8 +190,21 @@
   @apply rounded border border-stone-300 bg-white px-3 py-1.5 text-sm font-semibold text-stone-700 transition hover:border-stone-500 hover:bg-stone-100;
 }
 
+.admin-editor-toolbar {
+  @apply sticky top-0 z-10 flex max-h-40 flex-wrap gap-2 overflow-y-auto border-b border-stone-200 bg-stone-50 p-2 shadow-sm;
+}
+
 .admin-rich-editor {
-  @apply text-base leading-7 text-stone-800;
+  @apply max-h-[65vh] overflow-y-auto text-base leading-7 text-stone-800;
+}
+
+.admin-rich-editor .ProseMirror {
+  @apply min-h-[28rem] p-4 outline-none;
+}
+
+.admin-rich-editor p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  @apply pointer-events-none float-left h-0 text-stone-400;
 }
 
 .admin-rich-editor:empty::before {
@@ -205,6 +218,22 @@
 
 .admin-rich-editor ul {
   @apply my-4 list-disc pl-6;
+}
+
+.admin-rich-editor ol {
+  @apply my-4 list-decimal pl-6;
+}
+
+.admin-rich-editor blockquote {
+  @apply my-5 border-l-4 border-amber-400 pl-4 italic text-stone-600;
+}
+
+.admin-rich-editor pre {
+  @apply my-5 overflow-x-auto rounded bg-stone-900 p-4 text-sm text-stone-100;
+}
+
+.admin-rich-editor img {
+  @apply my-5 h-auto max-w-full rounded;
 }
 
 .admin-rich-editor a {
