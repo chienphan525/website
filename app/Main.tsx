@@ -15,7 +15,11 @@ export default function Home({ posts }) {
             <br className="hidden lg:block" />
             mọi áp lực sẽ Tan
           </h1>
-          <p>Những câu chuyện nhỏ về tài chính, cảm xúc và một cuộc sống an yên hơn.</p>
+          <p>
+            <span>Những câu chuyện nhỏ về tài chính, cảm xúc</span>
+            <br className="hidden lg:block" />
+            <span>Và một cuộc sống an yên hơn.</span>
+          </p> 
         </div>
       </section>
       <section className="mx-auto max-w-6xl px-5 py-14 sm:px-8 sm:py-20">
