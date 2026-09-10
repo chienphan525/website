@@ -11,18 +11,23 @@ export default function Home({ posts }) {
         <div className="cp-hero-copy">
           <p className="cp-kicker">CHIẾN PHAN</p>
           <h1>
-            Chạm nhẹ từng khoảnh khắc,
-            <br />
-            mọi áp lực sẽ Tan
+            <span className="block lg:inline">Chạm nhẹ từng</span>
+            <span className="block lg:ml-2 lg:inline">khoảnh khắc,</span>
+            <br className="hidden lg:block" />
+            <span className="block">mọi áp lực sẽ Tan</span>
           </h1>
-          <p>Những câu chuyện nhỏ về tài chính, cảm xúc và một cuộc sống an yên hơn.</p>
+          <p>
+            <span>Những câu chuyện nhỏ về tài chính, cảm xúc</span>
+            <br className="hidden lg:block" />
+            <span>Và một cuộc sống an yên hơn.</span>
+          </p>
         </div>
       </section>
       <section className="mx-auto max-w-6xl px-5 py-14 sm:px-8 sm:py-20">
         <div className="mb-10 flex items-end justify-between gap-6">
           <div>
             <p className="cp-kicker text-primary-500">GÓC CHIA SẺ</p>
-            <h2 className="mt-2 font-serif text-4xl font-semibold text-stone-900 sm:text-5xl">
+            <h2 className="mt-2 font-sans text-4xl font-semibold text-stone-900 sm:text-5xl">
               Bài viết mới nhất
             </h2>
           </div>
@@ -56,7 +61,7 @@ export default function Home({ posts }) {
                     <span className="h-px w-6 bg-primary-400" />
                     <time dateTime={post.date}>{formatDate(post.date, siteMetadata.locale)}</time>
                   </div>
-                  <h3 className="font-serif text-2xl font-semibold leading-tight text-stone-900 sm:text-3xl">
+                  <h3 className="font-sans text-2xl font-semibold leading-tight text-stone-900 sm:text-3xl">
                     <Link href={'/blog/' + post.slug} className="transition hover:text-primary-600">
                       {post.title}
                     </Link>

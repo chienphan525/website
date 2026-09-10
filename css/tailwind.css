@@ -10,7 +10,7 @@
   position: relative;
   min-height: min(620px, 72vh);
   display: grid;
-  place-items: center;
+  place-items: end start;
   overflow: hidden;
   background: center / cover url('/static/chienphan/hero.jpg');
 }
@@ -22,28 +22,36 @@
 }
 .cp-hero-copy {
   position: relative;
-  max-width: 58rem;
+  width: 100%;
+  max-width: 54rem;
+  margin: 0 auto;
   padding: 3rem 1.25rem;
-  text-align: center;
+  text-align: left;
   color: white;
 }
 .cp-hero h1 {
   margin: 0.55rem 0 1.25rem;
-  font-family: Georgia, serif;
-  font-size: clamp(2.6rem, 6vw, 5.5rem);
-  font-style: italic;
-  font-weight: 500;
-  line-height: 1.05;
+  font-family: var(--font-space-grotesk), sans-serif;
+  font-size: 2.25rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.25;
   text-shadow: 0 2px 24px rgba(0, 0, 0, 0.45);
+}
+@media (min-width: 1024px) {
+  .cp-hero h1 {
+    font-size: 3.50rem;
+  }
 }
 .cp-hero-copy > p:last-child {
   max-width: 38rem;
-  margin: auto;
+  margin: 0;
   font-size: 1.1rem;
   line-height: 1.8;
   color: rgba(255, 255, 255, 0.85);
 }
 .cp-kicker {
+  margin: 0;
   font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 0.24em;
@@ -384,4 +392,17 @@ input:-webkit-autofill:focus {
     opacity: 1;
     transform: none;
   }
+}
+
+body::-webkit-scrollbar-thumb {
+  background-image: linear-gradient(135deg, #ffd700, #ffd700);
+  border-radius: 50px;
+}
+
+.cp-prose img:first-child {
+  display: none;
+}
+
+.cp-post .cp-prose > p:first-child {
+  display: none;
 }

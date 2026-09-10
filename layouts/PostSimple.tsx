@@ -20,25 +20,33 @@ export default function PostSimple({ content, next, prev, children }: LayoutProp
   return (
     <article className="cp-post">
       <ScrollTopAndComment />
-      <header className="border-b border-stone-200 bg-[#f1ece2]">
-        <div className="mx-auto max-w-4xl px-5 py-14 text-center sm:px-8 sm:py-20">
-          <Link href="/blog" className="cp-link">
+      <header className="relative h-[72vh] min-h-[420px] overflow-hidden">
+        {content.images && content.images.length > 0 && (
+          <img
+            src={content.images[0]}
+            alt={title}
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+        )}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-black/10" />
+        <div className="relative z-10 mx-auto flex h-full max-w-4xl flex-col justify-end px-5 pb-12 text-left text-white sm:px-8 sm:pb-16">
+          <Link href="/blog" className="text-sm text-white/80 hover:text-white">
             ← Tất cả bài viết
           </Link>
-          <div className="mt-7 flex justify-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-stone-500">
+          <div className="mt-7 flex justify-start gap-2 text-xs font-bold uppercase tracking-[0.16em] text-white/80">
             <span>{tags?.[0] || 'Chia sẻ'}</span>
             <span>•</span>
             <time dateTime={date}>{formatDate(date, siteMetadata.locale)}</time>
           </div>
-          <h1 className="mx-auto mt-5 max-w-4xl font-serif text-4xl font-semibold leading-tight text-stone-900 sm:text-5xl lg:text-6xl">
+          <h1 className="mt-4 max-w-4xl font-sans text-4xl font-semibold leading-tight text-white sm:text-5xl lg:text-6xl">
             {title}
           </h1>
-          <p className="mt-5 text-sm text-stone-500">{readingTime?.text}</p>
+          <p className="mt-5 text-sm text-white/80">{readingTime?.text}</p>
         </div>
       </header>
 
       <div className="mx-auto max-w-3xl px-5 pb-16 pt-10 sm:px-8 sm:pb-24 sm:pt-14">
-        <div className="cp-prose prose max-w-none">{children}</div>
+        <div className="cp-prose prose max-w-none"> {children} </div>
 
         <div className="mt-14 border-y border-stone-200 py-7">
           <p className="font-serif text-2xl text-stone-900">Chạm là Tan</p>

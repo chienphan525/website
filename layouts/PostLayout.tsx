@@ -30,13 +30,19 @@ interface LayoutProps {
 }
 
 export default function PostLayout({ content, authorDetails, next, prev, children }: LayoutProps) {
-  const { filePath, path, slug, date, title, tags, readingTime } = content
+  const { filePath, path, slug, date, title, tags, readingTime, images } = content
   const basePath = path.split('/')[0]
 
   return (
     <SectionContainer>
       <ScrollTopAndComment />
       <article>
+        <div className="relative h-[50vh] w-full overflow-hidden">
+          {images && images.length > 0 && (
+            <img src={images[0]} alt={title} className="h-full w-full object-cover" />
+          )}
+          <div className="absolute inset-0 bg-black/30" />
+        </div>
         <div className="xl:divide-y xl:divide-gray-200 xl:dark:divide-gray-700">
           <header className="pt-6 xl:pb-6">
             <div className="space-y-1 text-center">
