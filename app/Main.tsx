@@ -11,8 +11,8 @@ export default function Home({ posts }) {
         <div className="cp-hero-copy">
           <p className="cp-kicker">CHIẾN PHAN</p>
           <h1>
-            <span>Chạm nhẹ từng</span>{' '}
-            <span>khoảnh khắc,</span>
+            <span>Chạm nhẹ từng</span>
+            <span> khoảnh khắc,</span>
             <br className="hidden lg:block" />
             <span>mọi áp lực sẽ Tan</span>
           </h1>
