@@ -1,4 +1,3 @@
-```tsx
 import { NextResponse } from 'next/server'
 import { isAdmin } from '@/lib/admin'
 import {
@@ -74,4 +73,3 @@ export async function POST(request: Request) {
 
   return NextResponse.json(newLink, { status: 201 })
 }
-```
