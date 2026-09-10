@@ -51,7 +51,7 @@
   color: rgba(255, 255, 255, 0.85);
 }
 .cp-kicker {
-  margin: 0;
+  margin: 0.25rem;
   font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 0.24em;
