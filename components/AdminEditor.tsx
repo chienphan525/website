@@ -127,12 +127,12 @@ function RichTextEditor({
     onSelectionUpdate: () => refreshToolbar((version) => version + 1),
   })
 
-  useEffect(() => {
-    if (editor && content !== lastEditorHtml.current) {
-      editor.commands.setContent(markdownToEditorHtml(content), { emitUpdate: false })
-      lastEditorHtml.current = editor.getHTML()
-    }
-  }, [content, editor])
+// useEffect(() => {
+//   if (editor && content !== lastEditorHtml.current) {
+//     editor.commands.setContent(markdownToEditorHtml(content), { emitUpdate: false })
+//     lastEditorHtml.current = editor.getHTML()
+//   }
+// }, [content, editor])
 
   if (!editor)
     return <div className="admin-rich-editor min-h-[28rem] p-4">Đang tải trình soạn thảo…</div>
