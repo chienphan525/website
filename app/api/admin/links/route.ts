@@ -1,3 +1,4 @@
+```tsx
 import { NextResponse } from 'next/server'
 import { isAdmin } from '@/lib/admin'
 import {
@@ -29,19 +30,13 @@ export async function POST(request: Request) {
   const platform = String(body.platform || '').trim()
 
   if (!name || !url) {
-    return NextResponse.json(
-      { error: 'Tên sản phẩm và link là bắt buộc' },
-      { status: 400 }
-    )
+    return NextResponse.json({ error: 'Tên sản phẩm và link là bắt buộc' }, { status: 400 })
   }
 
   try {
     new URL(url)
   } catch {
-    return NextResponse.json(
-      { error: 'Link không hợp lệ' },
-      { status: 400 }
-    )
+    return NextResponse.json({ error: 'Link không hợp lệ' }, { status: 400 })
   }
 
   const links = await getAffiliateLinks()
@@ -49,10 +44,7 @@ export async function POST(request: Request) {
   let slug = makeSlug(String(body.slug || name))
 
   if (!slug) {
-    return NextResponse.json(
-      { error: 'Không tạo được slug' },
-      { status: 400 }
-    )
+    return NextResponse.json({ error: 'Không tạo được slug' }, { status: 400 })
   }
 
   if (links.some((link) => link.slug === slug)) {
@@ -82,3 +74,4 @@ export async function POST(request: Request) {
 
   return NextResponse.json(newLink, { status: 201 })
 }
+```
