@@ -131,7 +131,6 @@ function RichTextEditor({
     if (editor && content !== lastEditorHtml.current) {
       editor.commands.setContent(markdownToEditorHtml(content), { emitUpdate: false })
       lastEditorHtml.current = editor.getHTML()
-      onChangeRef.current(lastEditorHtml.current)
     }
   }, [content, editor])
 
