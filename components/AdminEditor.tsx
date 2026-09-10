@@ -468,6 +468,17 @@ function toMdx(post: PostForm) {
     .split(',')
     .map((tag) => tag.trim())
     .filter(Boolean)
+
+  const body = post.body
+    .replace(
+      /<p>\s*<img\s+src=["']([^"']+)["']\s+alt=["']([^"']*)["']\s*\/?>\s*<\/p>/gi,
+      (_, src, alt) => `![${alt || 'Hình minh họa'}](${src})`,
+    )
+    .replace(
+      /<img\s+src=["']([^"']+)["']\s+alt=["']([^"']*)["']\s*\/?>/gi,
+      (_, src, alt) => `![${alt || 'Hình minh họa'}](${src})`,
+    )
+
   return [
     '---',
     `title: ${quote(post.title)}`,
@@ -478,7 +489,7 @@ function toMdx(post: PostForm) {
     'layout: PostSimple',
     '---',
     '',
-    post.body.trim(),
+    body.trim(),
     '',
   ]
     .filter(Boolean)
