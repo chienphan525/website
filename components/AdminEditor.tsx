@@ -93,7 +93,6 @@ function RichTextEditor({
 }) {
   const lastEditorHtml = useRef('')
   const onChangeRef = useRef(onChange)
-  const [, refreshToolbar] = useState(0)
   const fileInputRef = useRef<HTMLInputElement>(null)
   onChangeRef.current = onChange
   const editor = useEditor({
@@ -124,8 +123,14 @@ function RichTextEditor({
       lastEditorHtml.current = html
       onChangeRef.current(html)
     },
-    onSelectionUpdate: () => refreshToolbar((version) => version + 1),
   })
+
+  useEffect(() => {
+    if (editor && content !== lastEditorHtml.current) {
+      editor.commands.setContent(markdownToEditorHtml(content), { emitUpdate: false })
+      lastEditorHtml.current = editor.getHTML()
+    }
+  }, [content, editor])
 
   if (!editor)
     return <div className="admin-rich-editor min-h-[28rem] p-4">Đang tải trình soạn thảo…</div>
