@@ -2,6 +2,12 @@
 
 import { FormEvent, useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { EditorContent, useEditor } from '@tiptap/react'
+import StarterKit from '@tiptap/starter-kit'
+import Link from '@tiptap/extension-link'
+import Image from '@tiptap/extension-image'
+import TextAlign from '@tiptap/extension-text-align'
+import Placeholder from '@tiptap/extension-placeholder'
 
 type PostForm = {
   title: string
@@ -75,74 +81,205 @@ function RichTextEditor({
   content: string
   onChange: (value: string) => void
 }) {
-  const editor = useRef<HTMLDivElement>(null)
-  const lastEmitted = useRef('')
+  const lastEditorHtml = useRef('')
+  const [, refreshToolbar] = useState(0)
+  const editor = useEditor({
+    immediatelyRender: false,
+    extensions: [
+      StarterKit,
+      Link.configure({ openOnClick: false, autolink: true, defaultProtocol: 'https' }),
+      Image.configure({ allowBase64: false }),
+      TextAlign.configure({ types: ['heading', 'paragraph'] }),
+      Placeholder.configure({ placeholder: 'Viết nội dung bài viết ở đây…' }),
+    ],
+    content: markdownToEditorHtml(content),
+    editorProps: {
+      attributes: { class: 'admin-rich-editor min-h-[28rem] p-4 outline-none' },
+    },
+    onUpdate: ({ editor }) => {
+      const html = editor.getHTML()
+      lastEditorHtml.current = html
+      onChange(html)
+    },
+    onSelectionUpdate: () => refreshToolbar((version) => version + 1),
+  })
 
   useEffect(() => {
-    if (editor.current && content !== lastEmitted.current) {
-      editor.current.innerHTML = markdownToEditorHtml(content)
-      lastEmitted.current = content
+    if (editor && content !== lastEditorHtml.current) {
+      editor.commands.setContent(markdownToEditorHtml(content), { emitUpdate: false })
+      lastEditorHtml.current = editor.getHTML()
+      onChange(lastEditorHtml.current)
     }
-  }, [content])
+  }, [content, editor, onChange])
 
-  const command = (name: string, commandValue?: string) => {
-    editor.current?.focus()
-    document.execCommand(name, false, commandValue)
-    if (editor.current) {
-      lastEmitted.current = editor.current.innerHTML
-      onChange(editor.current.innerHTML)
-    }
-  }
+  if (!editor)
+    return <div className="admin-rich-editor min-h-[28rem] p-4">Đang tải trình soạn thảo…</div>
+
+  const toolClass = (active = false) =>
+    `admin-editor-button ${active ? 'border-stone-900 bg-stone-900 text-white hover:bg-stone-800' : ''}`
 
   const addLink = () => {
     const url = window.prompt('Dán đường dẫn đầy đủ (https://…)')
-    if (url) command('createLink', url)
+    if (url) editor.chain().focus().extendMarkRange('link').setLink({ href: url }).run()
+  }
+
+  const addImage = () => {
+    const url = window.prompt('Dán đường dẫn ảnh đầy đủ (https://…)')
+    if (url) editor.chain().focus().setImage({ src: url, alt: 'Hình minh họa' }).run()
   }
 
   return (
     <div className="overflow-hidden rounded border border-stone-300 bg-white">
-      <div className="flex flex-wrap gap-2 border-b border-stone-200 bg-stone-50 p-2">
-        <button type="button" className="admin-editor-button" onClick={() => command('bold')}>
+      {/* The container only prevents toolbar buttons from collapsing the editor selection. */}
+      {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
+      <div
+        className="admin-editor-toolbar"
+        aria-label="Công cụ soạn thảo"
+        onMouseDown={(event) => {
+          // Toolbar clicks must not steal the text selection before the command runs.
+          if (event.target instanceof HTMLButtonElement) event.preventDefault()
+        }}
+      >
+        <select
+          aria-label="Kiểu đoạn văn"
+          className="admin-editor-button"
+          value={
+            editor.isActive('heading', { level: 2 })
+              ? 'h2'
+              : editor.isActive('heading', { level: 3 })
+                ? 'h3'
+                : editor.isActive('heading', { level: 4 })
+                  ? 'h4'
+                  : 'p'
+          }
+          onChange={(event) => {
+            const chain = editor.chain().focus()
+            if (event.target.value === 'h2') chain.toggleHeading({ level: 2 }).run()
+            else if (event.target.value === 'h3') chain.toggleHeading({ level: 3 }).run()
+            else if (event.target.value === 'h4') chain.toggleHeading({ level: 4 }).run()
+            else chain.setParagraph().run()
+          }}
+        >
+          <option value="p">Đoạn văn</option>
+          <option value="h2">Tiêu đề lớn</option>
+          <option value="h3">Tiêu đề nhỏ</option>
+          <option value="h4">Tiêu đề phụ</option>
+        </select>
+        <button
+          type="button"
+          className={toolClass(editor.isActive('bold'))}
+          onClick={() => editor.chain().focus().toggleBold().run()}
+        >
           Đậm
         </button>
         <button
           type="button"
-          className="admin-editor-button italic"
-          onClick={() => command('italic')}
+          className={toolClass(editor.isActive('italic'))}
+          onClick={() => editor.chain().focus().toggleItalic().run()}
         >
           Nghiêng
         </button>
         <button
           type="button"
-          className="admin-editor-button"
-          onClick={() => command('formatBlock', 'h2')}
+          className={toolClass(editor.isActive('strike'))}
+          onClick={() => editor.chain().focus().toggleStrike().run()}
         >
-          Tiêu đề
+          Gạch chữ
         </button>
         <button
           type="button"
-          className="admin-editor-button"
-          onClick={() => command('insertUnorderedList')}
+          className={toolClass(editor.isActive('bulletList'))}
+          onClick={() => editor.chain().focus().toggleBulletList().run()}
         >
           Danh sách
         </button>
-        <button type="button" className="admin-editor-button" onClick={addLink}>
-          Thêm liên kết
+        <button
+          type="button"
+          className={toolClass(editor.isActive('orderedList'))}
+          onClick={() => editor.chain().focus().toggleOrderedList().run()}
+        >
+          Đánh số
+        </button>
+        <button
+          type="button"
+          className={toolClass(editor.isActive('blockquote'))}
+          onClick={() => editor.chain().focus().toggleBlockquote().run()}
+        >
+          Trích dẫn
+        </button>
+        <button
+          type="button"
+          className={toolClass(editor.isActive('codeBlock'))}
+          onClick={() => editor.chain().focus().toggleCodeBlock().run()}
+        >
+          Mã
+        </button>
+        <button type="button" className={toolClass(editor.isActive('link'))} onClick={addLink}>
+          Liên kết
+        </button>
+        <button
+          type="button"
+          className={toolClass()}
+          onClick={() => editor.chain().focus().unsetLink().run()}
+        >
+          Bỏ link
+        </button>
+        <button type="button" className={toolClass()} onClick={addImage}>
+          Ảnh URL
+        </button>
+        <button
+          type="button"
+          className={toolClass(editor.isActive({ textAlign: 'left' }))}
+          onClick={() => editor.chain().focus().setTextAlign('left').run()}
+        >
+          Trái
+        </button>
+        <button
+          type="button"
+          className={toolClass(editor.isActive({ textAlign: 'center' }))}
+          onClick={() => editor.chain().focus().setTextAlign('center').run()}
+        >
+          Giữa
+        </button>
+        <button
+          type="button"
+          className={toolClass(editor.isActive({ textAlign: 'right' }))}
+          onClick={() => editor.chain().focus().setTextAlign('right').run()}
+        >
+          Phải
+        </button>
+        <button
+          type="button"
+          className={toolClass()}
+          onClick={() => editor.chain().focus().setHorizontalRule().run()}
+        >
+          Đường kẻ
+        </button>
+        <button
+          type="button"
+          className={toolClass()}
+          onClick={() => editor.chain().focus().unsetAllMarks().clearNodes().run()}
+        >
+          Xóa định dạng
+        </button>
+        <button
+          type="button"
+          className={toolClass()}
+          disabled={!editor.can().undo()}
+          onClick={() => editor.chain().focus().undo().run()}
+        >
+          Hoàn tác
+        </button>
+        <button
+          type="button"
+          className={toolClass()}
+          disabled={!editor.can().redo()}
+          onClick={() => editor.chain().focus().redo().run()}
+        >
+          Làm lại
         </button>
       </div>
-      <div
-        ref={editor}
-        contentEditable
-        role="textbox"
-        aria-multiline="true"
-        data-placeholder="Viết nội dung bài viết ở đây…"
-        className="admin-rich-editor min-h-[28rem] p-4 outline-none"
-        onInput={() => {
-          if (!editor.current) return
-          lastEmitted.current = editor.current.innerHTML
-          onChange(editor.current.innerHTML)
-        }}
-      />
+      <EditorContent editor={editor} />
     </div>
   )
 }
@@ -198,6 +335,7 @@ export default function AdminEditor({ initialSlug }: { initialSlug?: string }) {
   const [post, setPost] = useState<PostForm>(blank)
   const [status, setStatus] = useState('')
   const [editorMode, setEditorMode] = useState<'rich' | 'markdown'>('rich')
+  const richBody = useRef('')
 
   useEffect(() => {
     if (!initialSlug) return
@@ -220,7 +358,10 @@ export default function AdminEditor({ initialSlug }: { initialSlug?: string }) {
     const response = await fetch(endpoint, {
       method: initialSlug ? 'PUT' : 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ slug: post.slug, content: toMdx(post) }),
+      body: JSON.stringify({
+        slug: post.slug,
+        content: toMdx({ ...post, body: editorMode === 'rich' ? richBody.current : post.body }),
+      }),
     })
     if (!response.ok) {
       const error = await response.json().catch(() => ({}))
@@ -308,14 +449,20 @@ export default function AdminEditor({ initialSlug }: { initialSlug?: string }) {
         <div className="mt-2 flex flex-wrap items-center gap-2">
           <button
             type="button"
-            onClick={() => setEditorMode('rich')}
+            onClick={() => {
+              update('body', richBody.current || post.body)
+              setEditorMode('rich')
+            }}
             className={`admin-editor-button ${editorMode === 'rich' ? 'bg-stone-900 text-white' : ''}`}
           >
             Trình soạn thảo
           </button>
           <button
             type="button"
-            onClick={() => setEditorMode('markdown')}
+            onClick={() => {
+              update('body', richBody.current || post.body)
+              setEditorMode('markdown')
+            }}
             className={`admin-editor-button ${editorMode === 'markdown' ? 'bg-stone-900 text-white' : ''}`}
           >
             Markdown
@@ -336,7 +483,12 @@ export default function AdminEditor({ initialSlug }: { initialSlug?: string }) {
             : 'Dành cho người quen Markdown. “Nhập ví dụ” sẽ thay nội dung hiện tại bằng một mẫu.'}
         </p>
         {editorMode === 'rich' ? (
-          <RichTextEditor content={post.body} onChange={(content) => update('body', content)} />
+          <RichTextEditor
+            content={post.body}
+            onChange={(content) => {
+              richBody.current = content
+            }}
+          />
         ) : (
           <textarea
             required
