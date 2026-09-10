@@ -472,11 +472,11 @@ function toMdx(post: PostForm) {
   const body = post.body
     .replace(
       /<p>\s*<img\s+src=["']([^"']+)["']\s+alt=["']([^"']*)["']\s*\/?>\s*<\/p>/gi,
-      (_, src, alt) => `![${alt || 'Hình minh họa'}](${src})`,
+      (_, src, alt) => `![${alt || 'Hình minh họa'}](${src})`
     )
     .replace(
       /<img\s+src=["']([^"']+)["']\s+alt=["']([^"']*)["']\s*\/?>/gi,
-      (_, src, alt) => `![${alt || 'Hình minh họa'}](${src})`,
+      (_, src, alt) => `![${alt || 'Hình minh họa'}](${src})`
     )
 
   return [
