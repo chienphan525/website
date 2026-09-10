@@ -118,7 +118,7 @@ function RichTextEditor({
     editorProps: {
       attributes: {
         class: 'admin-rich-editor min-h-[28rem] p-4 outline-none',
-        tabIndex: 0,
+        tabIndex: '0',
       },
     },
     onUpdate: ({ editor }) => {
