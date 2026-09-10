@@ -19,7 +19,7 @@ export default function Home({ posts }) {
             <span>Những câu chuyện nhỏ về tài chính, cảm xúc</span>
             <br className="hidden lg:block" />
             <span>Và một cuộc sống an yên hơn.</span>
-          </p> 
+          </p>
         </div>
       </section>
       <section className="mx-auto max-w-6xl px-5 py-14 sm:px-8 sm:py-20">
