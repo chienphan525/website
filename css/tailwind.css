@@ -10,7 +10,7 @@
   position: relative;
   min-height: min(620px, 72vh);
   display: grid;
-  place-items: center;
+  place-items: end start;
   overflow: hidden;
   background: center / cover url('/static/chienphan/hero.jpg');
 }
