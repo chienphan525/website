@@ -610,7 +610,7 @@ export default function AdminEditor({ initialSlug }: { initialSlug?: string }) {
           onChange={(e) => update('summary', e.target.value)}
         />
       </label>
-      <label className="admin-label">
+      <div className="admin-label">
         Nội dung bài viết
         <div className="mt-2 flex flex-wrap items-center gap-2">
           <button
@@ -666,7 +666,7 @@ export default function AdminEditor({ initialSlug }: { initialSlug?: string }) {
             }
           />
         )}
-      </label>
+      </div>
       <div className="flex flex-wrap gap-3">
         <button className="admin-button">Lưu bài viết</button>
         {initialSlug && (
