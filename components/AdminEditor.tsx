@@ -8,6 +8,16 @@ import Link from '@tiptap/extension-link'
 import Image from '@tiptap/extension-image'
 import TextAlign from '@tiptap/extension-text-align'
 import Placeholder from '@tiptap/extension-placeholder'
+import Underline from '@tiptap/extension-underline'
+import { TextStyle } from '@tiptap/extension-text-style'
+import Color from '@tiptap/extension-color'
+import Highlight from '@tiptap/extension-highlight'
+import { Table } from '@tiptap/extension-table'
+import TableRow from '@tiptap/extension-table-row'
+import TableHeader from '@tiptap/extension-table-header'
+import TableCell from '@tiptap/extension-table-cell'
+import TaskList from '@tiptap/extension-task-list'
+import TaskItem from '@tiptap/extension-task-item'
 
 type PostForm = {
   title: string
@@ -82,7 +92,9 @@ function RichTextEditor({
   onChange: (value: string) => void
 }) {
   const lastEditorHtml = useRef('')
+  const onChangeRef = useRef(onChange)
   const [, refreshToolbar] = useState(0)
+  onChangeRef.current = onChange
   const editor = useEditor({
     immediatelyRender: false,
     extensions: [
@@ -91,6 +103,16 @@ function RichTextEditor({
       Image.configure({ allowBase64: false }),
       TextAlign.configure({ types: ['heading', 'paragraph'] }),
       Placeholder.configure({ placeholder: 'Viết nội dung bài viết ở đây…' }),
+      Underline,
+      TextStyle,
+      Color,
+      Highlight.configure({ multicolor: true }),
+      Table.configure({ resizable: true }),
+      TableRow,
+      TableHeader,
+      TableCell,
+      TaskList,
+      TaskItem.configure({ nested: true }),
     ],
     content: markdownToEditorHtml(content),
     editorProps: {
@@ -99,7 +121,7 @@ function RichTextEditor({
     onUpdate: ({ editor }) => {
       const html = editor.getHTML()
       lastEditorHtml.current = html
-      onChange(html)
+      onChangeRef.current(html)
     },
     onSelectionUpdate: () => refreshToolbar((version) => version + 1),
   })
@@ -108,9 +130,9 @@ function RichTextEditor({
     if (editor && content !== lastEditorHtml.current) {
       editor.commands.setContent(markdownToEditorHtml(content), { emitUpdate: false })
       lastEditorHtml.current = editor.getHTML()
-      onChange(lastEditorHtml.current)
+      onChangeRef.current(lastEditorHtml.current)
     }
-  }, [content, editor, onChange])
+  }, [content, editor])
 
   if (!editor)
     return <div className="admin-rich-editor min-h-[28rem] p-4">Đang tải trình soạn thảo…</div>
@@ -126,6 +148,16 @@ function RichTextEditor({
   const addImage = () => {
     const url = window.prompt('Dán đường dẫn ảnh đầy đủ (https://…)')
     if (url) editor.chain().focus().setImage({ src: url, alt: 'Hình minh họa' }).run()
+  }
+
+  const setTextColor = () => {
+    const color = window.prompt('Nhập mã màu, ví dụ: #b45309')
+    if (color) editor.chain().focus().setColor(color).run()
+  }
+
+  const setHighlight = () => {
+    const color = window.prompt('Nhập màu tô nền, ví dụ: #fef08a', '#fef08a')
+    if (color) editor.chain().focus().toggleHighlight({ color }).run()
   }
 
   return (
@@ -174,6 +206,13 @@ function RichTextEditor({
         </button>
         <button
           type="button"
+          className={toolClass(editor.isActive('underline'))}
+          onClick={() => editor.chain().focus().toggleUnderline().run()}
+        >
+          Gạch chân
+        </button>
+        <button
+          type="button"
           className={toolClass(editor.isActive('italic'))}
           onClick={() => editor.chain().focus().toggleItalic().run()}
         >
@@ -188,6 +227,16 @@ function RichTextEditor({
         </button>
         <button
           type="button"
+          className={toolClass(editor.isActive('highlight'))}
+          onClick={setHighlight}
+        >
+          Tô màu
+        </button>
+        <button type="button" className={toolClass()} onClick={setTextColor}>
+          Màu chữ
+        </button>
+        <button
+          type="button"
           className={toolClass(editor.isActive('bulletList'))}
           onClick={() => editor.chain().focus().toggleBulletList().run()}
         >
@@ -199,6 +248,13 @@ function RichTextEditor({
           onClick={() => editor.chain().focus().toggleOrderedList().run()}
         >
           Đánh số
+        </button>
+        <button
+          type="button"
+          className={toolClass(editor.isActive('taskList'))}
+          onClick={() => editor.chain().focus().toggleTaskList().run()}
+        >
+          Checklist
         </button>
         <button
           type="button"
@@ -227,6 +283,40 @@ function RichTextEditor({
         <button type="button" className={toolClass()} onClick={addImage}>
           Ảnh URL
         </button>
+        <button
+          type="button"
+          className={toolClass(editor.isActive('table'))}
+          onClick={() =>
+            editor.chain().focus().insertTable({ rows: 3, cols: 3, withHeaderRow: true }).run()
+          }
+        >
+          Bảng
+        </button>
+        {editor.isActive('table') && (
+          <>
+            <button
+              type="button"
+              className={toolClass()}
+              onClick={() => editor.chain().focus().addColumnAfter().run()}
+            >
+              + Cột
+            </button>
+            <button
+              type="button"
+              className={toolClass()}
+              onClick={() => editor.chain().focus().addRowAfter().run()}
+            >
+              + Hàng
+            </button>
+            <button
+              type="button"
+              className={toolClass()}
+              onClick={() => editor.chain().focus().deleteTable().run()}
+            >
+              Xóa bảng
+            </button>
+          </>
+        )}
         <button
           type="button"
           className={toolClass(editor.isActive({ textAlign: 'left' }))}

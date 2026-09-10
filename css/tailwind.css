@@ -236,6 +236,32 @@
   @apply my-5 h-auto max-w-full rounded;
 }
 
+.admin-rich-editor table {
+  @apply my-5 w-full border-collapse overflow-hidden rounded border border-stone-300;
+}
+
+.admin-rich-editor th {
+  @apply bg-stone-100 font-bold;
+}
+
+.admin-rich-editor th,
+.admin-rich-editor td {
+  @apply min-w-[7rem] border border-stone-300 p-2 align-top;
+}
+
+.admin-rich-editor .selectedCell::after {
+  content: '';
+  @apply pointer-events-none absolute inset-0 bg-amber-100/60;
+}
+
+.admin-rich-editor ul[data-type='taskList'] {
+  @apply list-none pl-0;
+}
+
+.admin-rich-editor ul[data-type='taskList'] li {
+  @apply flex gap-2;
+}
+
 .admin-rich-editor a {
   @apply text-primary-600 underline;
 }
