@@ -86,7 +86,7 @@ export default function AffiliateLinkManager() {
   }
 
   async function copyLink(slug: string) {
-    const shortUrl = `${window.location.origin}/${slug}`
+    const shortUrl = `https://chienphan.com/${slug}`
 
     await navigator.clipboard.writeText(shortUrl)
 
