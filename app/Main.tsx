@@ -12,7 +12,7 @@ export default function Home({ posts }) {
           <p className="cp-kicker">CHIẾN PHAN</p>
           <h1>
             Chạm nhẹ từng khoảnh khắc,
-            <br />
+            <br className="hidden lg:block" />
             mọi áp lực sẽ Tan
           </h1>
           <p>Những câu chuyện nhỏ về tài chính, cảm xúc và một cuộc sống an yên hơn.</p>
