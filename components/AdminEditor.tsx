@@ -116,7 +116,10 @@ function RichTextEditor({
     ],
     content: markdownToEditorHtml(content),
     editorProps: {
-      attributes: { class: 'admin-rich-editor min-h-[28rem] p-4 outline-none' },
+      attributes: {
+        class: 'admin-rich-editor min-h-[28rem] p-4 outline-none',
+        tabIndex: 0,
+      },
     },
     onUpdate: ({ editor }) => {
       const html = editor.getHTML()
