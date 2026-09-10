@@ -22,7 +22,7 @@ export default function Home({ posts }) {
         <div className="mb-10 flex items-end justify-between gap-6">
           <div>
             <p className="cp-kicker text-primary-500">GÓC CHIA SẺ</p>
-            <h2 className="mt-2 font-serif text-4xl font-semibold text-stone-900 sm:text-5xl">
+            <h2 className="mt-2 font-sans text-4xl font-semibold text-stone-900 sm:text-5xl">
               Bài viết mới nhất
             </h2>
           </div>
@@ -56,7 +56,7 @@ export default function Home({ posts }) {
                     <span className="h-px w-6 bg-primary-400" />
                     <time dateTime={post.date}>{formatDate(post.date, siteMetadata.locale)}</time>
                   </div>
-                  <h3 className="font-serif text-2xl font-semibold leading-tight text-stone-900 sm:text-3xl">
+                  <h3 className="font-sans text-2xl font-semibold leading-tight text-stone-900 sm:text-3xl">
                     <Link href={'/blog/' + post.slug} className="transition hover:text-primary-600">
                       {post.title}
                     </Link>
