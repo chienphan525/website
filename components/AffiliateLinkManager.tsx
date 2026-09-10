@@ -34,9 +34,7 @@ export default function AffiliateLinkManager() {
       const data = await response.json()
       setLinks(data)
     } catch (error) {
-      setMessage(
-        error instanceof Error ? error.message : 'Có lỗi xảy ra'
-      )
+      setMessage(error instanceof Error ? error.message : 'Có lỗi xảy ra')
     } finally {
       setLoading(false)
     }
@@ -81,9 +79,7 @@ export default function AffiliateLinkManager() {
       setUrl('')
       setMessage('Đã tạo link affiliate')
     } catch (error) {
-      setMessage(
-        error instanceof Error ? error.message : 'Có lỗi xảy ra'
-      )
+      setMessage(error instanceof Error ? error.message : 'Có lỗi xảy ra')
     } finally {
       setSaving(false)
     }
@@ -115,9 +111,7 @@ export default function AffiliateLinkManager() {
         onSubmit={createLink}
         className="rounded-xl border border-stone-200 bg-white p-5 shadow-sm"
       >
-        <h2 className="text-xl font-semibold text-stone-900">
-          Tạo link affiliate
-        </h2>
+        <h2 className="text-xl font-semibold text-stone-900">Tạo link affiliate</h2>
 
         <div className="mt-5 grid gap-4">
           <input
@@ -156,16 +150,12 @@ export default function AffiliateLinkManager() {
           </button>
         </div>
 
-        {message && (
-          <p className="mt-4 text-sm text-stone-600">{message}</p>
-        )}
+        {message && <p className="mt-4 text-sm text-stone-600">{message}</p>}
       </form>
 
       <div>
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <h2 className="text-xl font-semibold text-stone-900">
-            Danh sách link
-          </h2>
+          <h2 className="text-xl font-semibold text-stone-900">Danh sách link</h2>
 
           <input
             value={search}
@@ -184,23 +174,16 @@ export default function AffiliateLinkManager() {
         ) : (
           <div className="mt-5 divide-y overflow-hidden rounded-xl border border-stone-200 bg-white">
             {filteredLinks.map((link) => (
-              <div
-                key={link.slug}
-                className="p-4"
-              >
+              <div key={link.slug} className="p-4">
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                   <div className="min-w-0">
-                    <p className="font-semibold text-stone-900">
-                      {link.name}
-                    </p>
+                    <p className="font-semibold text-stone-900">{link.name}</p>
 
                     <p className="mt-1 text-sm text-stone-500">
                       {link.platform} · /{link.slug}
                     </p>
 
-                    <p className="mt-1 truncate text-xs text-stone-400">
-                      {link.url}
-                    </p>
+                    <p className="mt-1 truncate text-xs text-stone-400">{link.url}</p>
                   </div>
 
                   <button
