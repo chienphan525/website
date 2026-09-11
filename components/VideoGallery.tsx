@@ -21,6 +21,7 @@ export default function VideoGallery({
   const [query, setQuery] = useState('')
   const [period, setPeriod] = useState('all')
   const [sort, setSort] = useState<'newest' | 'oldest'>('newest')
+  const loadMoreRef = useRef<HTMLDivElement>(null)
 
   const visibleVideos = useMemo(() => {
     const now = new Date()
@@ -60,6 +61,23 @@ export default function VideoGallery({
       setLoading(false)
     }
   }
+  useEffect(() => {
+    const target = loadMoreRef.current
+    if (!target || !nextPageToken) return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !loading) {
+          loadMore()
+        }
+      },
+      { rootMargin: '800px' }
+    )
+
+    observer.observe(target)
+
+    return () => observer.disconnect()
+  }, [nextPageToken, loading])
 
   return (
     <section className="mx-auto max-w-6xl px-5 py-14 sm:px-8 sm:py-20">
@@ -117,14 +135,12 @@ export default function VideoGallery({
         <p className="py-16 text-center text-stone-600">Không tìm thấy video phù hợp.</p>
       )}
       {nextPageToken && (
-        <div className="mt-12 text-center">
-          <button
-            onClick={loadMore}
-            disabled={loading}
-            className="admin-button disabled:cursor-wait disabled:opacity-60"
-          >
-            {loading ? 'Đang tải…' : 'Tải thêm video'}
-          </button>
+        <div ref={loadMoreRef} className="h-20">
+          {loading && (
+            <p className="pt-8 text-center text-sm text-stone-500">
+              Đang tải thêm video…
+            </p>
+          )}
         </div>
       )}
       {!completeArchive && (
