@@ -9,7 +9,7 @@ export default function Header() {
         <Link href="/" aria-label="Chiến Phan">
           <img src="/static/chienphan/logo.png" alt="Chiến Phan" className="h-8 w-auto sm:h-12" />
         </Link>
-        <nav className="hidden items-center gap-6 text-sm font-normal uppercase tracking-[0.08em] text-white md:flex">
+        <nav className="hidden items-center gap-6 text-xs font-normal uppercase tracking-[0.08em] text-white md:flex">
           {headerNavLinks.map((link) => (
             <Link key={link.href} href={link.href} className="transition hover:text-primary-300">
               {link.title}
