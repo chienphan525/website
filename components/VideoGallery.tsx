@@ -137,9 +137,7 @@ export default function VideoGallery({
       {nextPageToken && (
         <div ref={loadMoreRef} className="h-20">
           {loading && (
-            <p className="pt-8 text-center text-sm text-stone-500">
-              Đang tải thêm video…
-            </p>
+            <p className="pt-8 text-center text-sm text-stone-500">Đang tải thêm video…</p>
           )}
         </div>
       )}
