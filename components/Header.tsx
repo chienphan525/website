@@ -1,5 +1,6 @@
 import Link from './Link'
 import MobileNav from './MobileNav'
+import headerNavLinks from '@/data/headerNavLinks'
 
 export default function Header() {
   return (
@@ -9,18 +10,11 @@ export default function Header() {
           <img src="/static/chienphan/logo.png" alt="Chiến Phan" className="h-8 w-auto sm:h-12" />
         </Link>
         <nav className="hidden items-center gap-8 text-sm font-bold uppercase tracking-[0.12em] text-white md:flex">
-          <Link href="/" className="transition hover:text-primary-300">
-            Trang chủ
-          </Link>
-          <Link href="/blog" className="transition hover:text-primary-300">
-            Bài viết
-          </Link>
-          <Link href="/videos" className="transition hover:text-primary-300">
-            Video
-          </Link>
-          <Link href="/about" className="transition hover:text-primary-300">
-            Về Chiến
-          </Link>
+          {headerNavLinks.map((link) => (
+            <Link key={link.href} href={link.href} className="transition hover:text-primary-300">
+              {link.title}
+            </Link>
+          ))}
         </nav>
         <div className="md:hidden">
           <MobileNav />
