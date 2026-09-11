@@ -25,9 +25,9 @@ export default function Home({ posts }) {
       <section className="mx-auto max-w-6xl px-5 py-14 sm:px-8 sm:py-20">
         <div className="mb-10 flex items-end justify-between gap-6">
           <div>
-            <p className="cp-kicker text-primary-500">GÓC CHIA SẺ</p>
+            <p className="cp-kicker text-primary-500">NỘI DUNG NỔI BẬT</p>
             <h2 className="mt-2 font-sans text-4xl font-semibold text-stone-900 sm:text-5xl">
-              Bài viết mới nhất
+              Những điều mình muốn chia sẻ
             </h2>
           </div>
           <Link href="/blog" className="cp-link hidden sm:block">
