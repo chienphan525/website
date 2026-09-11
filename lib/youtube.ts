@@ -36,7 +36,7 @@ export async function getVideoPage({
   limit?: number
 } = {}): Promise<VideoPage> {
   const key = process.env.YOUTUBE_API_KEY
-  const count = Math.min(Math.max(limit, 1), 24)
+  const count = Math.min(Math.max(limit, 1), 50)
 
   if (key) {
     const query = new URLSearchParams({
