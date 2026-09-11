@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import Link from './Link'
 import type { YouTubeVideo } from '@/lib/youtube'
 
@@ -46,7 +46,7 @@ export default function VideoGallery({
     setLoading(true)
     try {
       const response = await fetch(
-        '/api/videos?limit=12&pageToken=' + encodeURIComponent(nextPageToken)
+        '/api/videos?limit=50&pageToken=' + encodeURIComponent(nextPageToken)
       )
       const page = await response.json()
       setVideos((current) => [
