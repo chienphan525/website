@@ -37,7 +37,7 @@ export default async function VideoSection() {
             </Link>
           ))}
         </div>
-        <p className="mt-8 text-center text-sm text-stone-400">
+        <p className="mt-8 text-center text-sm text-stone-600">
           <Link href={channelUrl} className="underline underline-offset-4">
             Xem kênh Chiến Phan TV trên YouTube
           </Link>
