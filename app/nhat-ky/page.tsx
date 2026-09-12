@@ -21,9 +21,6 @@ export default function NhatKyPage() {
             Những ngày mình đã đi qua
           </h1>
           <p className="mt-5 text-lg leading-relaxed text-stone-600">
-            Những câu chuyện nhỏ, những ngày bình thường, những điều mình đã trải qua và muốn lưu lại.
-          </p>
-          <p className="mt-5 text-lg leading-relaxed text-stone-600">
             Những câu chuyện nhỏ, những ngày bình thường, những điều mình muốn lưu lại.
           </p>
           <div className="mt-6 h-0.5 w-12 bg-[#ffd700]" />
