@@ -71,8 +71,8 @@ body {
 .cp-card {
   overflow: hidden;
   border: 1px solid #e7e2d9;
-  background: #fff;
-  box-shadow: 0 8px 35px rgba(60, 45, 20, 0.06);
+  border: 1px solid #777772;
+  background: rgba(255, 255, 255, 0.16);
 }
 .cp-card-placeholder {
   background: linear-gradient(135deg, #473b2d, #b69547);
@@ -89,7 +89,7 @@ body {
 }
 
 .cp-prose {
-  color: #3d3b37;
+  color: #292929;
   font-size: 1.08rem;
   line-height: 1.9;
 }
