@@ -10,9 +10,7 @@ export const metadata = genPageMetadata({
 })
 
 export default function GiaTriSongPage() {
-  const posts = allCoreContent(sortPosts(allBlogs)).filter((post) =>
-    post.tags?.includes('Ngẫm')
-  )
+  const posts = allCoreContent(sortPosts(allBlogs)).filter((post) => post.tags?.includes('Ngẫm'))
 
   return (
     <main className="px-5 py-16 sm:px-8 sm:py-20">
@@ -25,8 +23,7 @@ export default function GiaTriSongPage() {
           </h1>
 
           <p className="mt-5 text-lg leading-relaxed text-stone-600">
-            Những góc nhìn, bài học và suy ngẫm về cách sống, cách nhìn người
-            và cách đối diện với cuộc đời.
+            Những góc nhìn, bài học, suy ngẫm về cong người và cuộc sống.
           </p>
 
           <div className="mt-6 h-0.5 w-12 bg-[#ffd700]" />
