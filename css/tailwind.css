@@ -7,13 +7,14 @@
 }
 
 body {
-  background-color: #b9b9b4;
+  background-color: #c3c3be;
   background-image:
-    radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.12) 0 1px, transparent 1.5px),
-    radial-gradient(circle at 70% 60%, rgba(60, 60, 55, 0.08) 0 1px, transparent 1.5px),
-    radial-gradient(circle at 40% 80%, rgba(255, 255, 255, 0.08) 0 1px, transparent 1.5px),
-    linear-gradient(135deg, #c2c2bd, #adada8);
-  background-size: 7px 7px, 11px 11px, 13px 13px, 100% 100%;
+    radial-gradient(circle at 15% 20%, rgba(255, 255, 255, 0.10) 0 1px, transparent 2px),
+    radial-gradient(circle at 75% 35%, rgba(80, 80, 75, 0.07) 0 1px, transparent 2px),
+    radial-gradient(circle at 35% 75%, rgba(255, 255, 255, 0.08) 0 1px, transparent 2px),
+    radial-gradient(circle at 85% 80%, rgba(70, 70, 65, 0.05) 0 1px, transparent 2px),
+    linear-gradient(135deg, #c8c8c3, #bdbdb8);
+  background-size: 9px 11px, 13px 9px, 11px 13px, 15px 11px, 100% 100%;
   background-attachment: fixed;
 }
 
