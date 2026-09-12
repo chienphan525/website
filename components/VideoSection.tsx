@@ -10,8 +10,9 @@ export default async function VideoSection() {
       <div className="mx-auto max-w-6xl">
         <div className="mb-10 flex items-end justify-between gap-5">
           <div>
-            <p className="cp-kicker text-primary-600">CHIẾN PHAN TV</p>
+            <p className="cp-kicker text-[#ffd700]">CHIẾN PHAN TV</p>
             <h2 className="mt-2 font-serif text-4xl text-stone-900 sm:text-5xl">Video mới nhất</h2>
+            <div className="mt-4 h-0.5 w-12 bg-[#ffd700]" />
           </div>
           <Link href="/videos" className="cp-link text-primary-400">
             Xem tất cả →
