@@ -23,7 +23,7 @@ export default async function VideoSection() {
             <Link
               href={`https://www.youtube.com/watch?v=${video.id}`}
               key={video.id}
-              className="group"
+              className="group overflow-hidden rounded border border-[#777772] bg-white/10 p-3 transition hover:border-[#ffd700]"
             >
               <img
                 src={`https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`}
