@@ -5,6 +5,7 @@ import VideoSection from '@/components/VideoSection'
 
 export default function Home({ posts }) {
   const lifePosts = posts.filter((post) => post.tags?.includes('Ngẫm'))
+  const usefulPosts = posts.filter((post) => post.tags?.includes('Hữu ích'))
   return (
     <>
       <section className="cp-hero">
@@ -126,6 +127,72 @@ export default function Home({ posts }) {
                   </h3>
 
                   <p className="mt-3 line-clamp-3 leading-7 text-stone-600">{post.summary}</p>
+                </div>
+              </article>
+            )
+          })}
+        </div>
+      </section>
+      <section className="mx-auto max-w-6xl px-5 py-14 sm:px-8 sm:py-20">
+        <div className="mb-10 flex items-end justify-between gap-6">
+          <div>
+            <p className="cp-kicker text-primary-500">CHIA SẺ HỮU ÍCH</p>
+            <h2 className="mt-2 font-sans text-4xl font-semibold text-stone-900 sm:text-5xl">
+              Những điều có thể giúp bạn
+            </h2>
+          </div>
+          <Link href="/blog" className="cp-link hidden sm:block">
+            Xem tất cả →
+          </Link>
+        </div>
+
+        <div className="grid gap-7 md:grid-cols-2">
+          {usefulPosts.slice(0, 2).map((post) => {
+            const image = post.images?.[0]
+
+            return (
+              <article key={post.slug} className="cp-card group">
+                <Link
+                  href={'/blog/' + post.slug}
+                  aria-label={post.title}
+                  className="block overflow-hidden"
+                >
+                  {image ? (
+                    <img
+                      src={image}
+                      alt=""
+                      className="aspect-[16/10] w-full object-cover transition duration-700 group-hover:scale-105"
+                    />
+                  ) : (
+                    <div className="cp-card-placeholder aspect-[16/10] w-full" />
+                  )}
+                </Link>
+
+                <div className="p-6 sm:p-7">
+                  <time
+                    dateTime={post.date}
+                    className="text-xs font-semibold uppercase tracking-[0.16em] text-stone-500"
+                  >
+                    {formatDate(post.date, siteMetadata.locale)}
+                  </time>
+
+                  <h3 className="mt-3 font-sans text-2xl font-semibold leading-tight text-stone-900 sm:text-3xl">
+                    <Link
+                      href={'/blog/' + post.slug}
+                      className="transition hover:text-primary-600"
+                    >
+                      {post.title}
+                    </Link>
+                  </h3>
+
+                  <p className="mt-4 line-clamp-3 leading-7 text-stone-600">{post.summary}</p>
+
+                  <Link
+                    href={'/blog/' + post.slug}
+                    className="cp-link mt-6 inline-block"
+                  >
+                    Đọc bài viết →
+                  </Link>
                 </div>
               </article>
             )
