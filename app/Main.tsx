@@ -35,7 +35,7 @@ export default function Home({ posts }) {
             Xem tất cả →
           </Link>
         </div>
-        <div className="grid gap-7 md:grid-cols-2">
+        <div className="grid gap-7 md:grid-cols-3">
           {posts.slice(0, 3).map((post) => {
             const image = post.images?.[0]
             return (
