@@ -23,8 +23,7 @@ export default function ReviewPage() {
           </h1>
 
           <p className="mt-5 text-lg leading-relaxed text-stone-600">
-            Những sản phẩm mình đã dùng, đã tìm hiểu
-            và những kinh nghiệm thực tế muốn chia sẻ.
+            Những sản phẩm mình đã dùng, đã tìm hiểu và những kinh nghiệm thực tế.
           </p>
 
           <div className="mt-6 h-0.5 w-12 bg-[#ffd700]" />
