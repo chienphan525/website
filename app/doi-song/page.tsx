@@ -55,8 +55,7 @@ export default function DoiSongPage() {
                   <p className="mt-4 leading-relaxed text-stone-600">{post.summary}</p>
                 )}
 
-                <Link
-                  href={`/blog/${post.slug}`} className="cp-link mt-6 inline-block">
+                <Link href={`/blog/${post.slug}`} className="cp-link mt-6 inline-block">
                   Đọc bài viết →
                 </Link>
               </div>
