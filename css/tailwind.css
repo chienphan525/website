@@ -8,13 +8,6 @@
 
 body {
   background-color: #cecec9;
-  background-image:
-    radial-gradient(circle at 15% 20%, rgba(255, 255, 255, 0.10) 0 1px, transparent 2px),
-    radial-gradient(circle at 75% 35%, rgba(80, 80, 75, 0.07) 0 1px, transparent 2px),
-    radial-gradient(circle at 35% 75%, rgba(255, 255, 255, 0.08) 0 1px, transparent 2px),
-    radial-gradient(circle at 85% 80%, rgba(70, 70, 65, 0.05) 0 1px, transparent 2px),
-    linear-gradient(135deg, #d2d2cd, #c7c7c2);
-  background-size: 9px 11px, 13px 9px, 11px 13px, 15px 11px, 100% 100%;
   background-attachment: fixed;
 }
 
