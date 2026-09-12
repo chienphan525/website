@@ -4,6 +4,7 @@ import siteMetadata from '@/data/siteMetadata'
 import VideoSection from '@/components/VideoSection'
 
 export default function Home({ posts }) {
+  const lifePosts = posts.filter((post) => post.tags?.includes('Ngẫm'))
   return (
     <>
       <section className="cp-hero">
@@ -69,6 +70,67 @@ export default function Home({ posts }) {
                   <Link href={'/blog/' + post.slug} className="cp-link mt-6 inline-block">
                     Đọc bài viết →
                   </Link>
+                </div>
+              </article>
+            )
+          })}
+        </div>
+      </section>
+            <section className="mx-auto max-w-6xl px-5 py-14 sm:px-8 sm:py-20">
+        <div className="mb-10 flex items-end justify-between gap-6">
+          <div>
+            <p className="cp-kicker text-primary-500">GIÁ TRỊ SỐNG</p>
+            <h2 className="mt-2 font-sans text-4xl font-semibold text-stone-900 sm:text-5xl">
+              Những điều đáng để ngẫm
+            </h2>
+          </div>
+          <Link href="/blog" className="cp-link hidden sm:block">
+            Xem tất cả →
+          </Link>
+        </div>
+
+        <div className="grid gap-7 md:grid-cols-3">
+          {lifePosts.slice(0, 3).map((post) => {
+            const image = post.images?.[0]
+
+            return (
+              <article key={post.slug} className="cp-card group">
+                <Link
+                  href={'/blog/' + post.slug}
+                  aria-label={post.title}
+                  className="block overflow-hidden"
+                >
+                  {image ? (
+                    <img
+                      src={image}
+                      alt=""
+                      className="h-52 w-full object-cover transition duration-700 group-hover:scale-105"
+                    />
+                  ) : (
+                    <div className="cp-card-placeholder h-52" />
+                  )}
+                </Link>
+
+                <div className="p-6">
+                  <time
+                    dateTime={post.date}
+                    className="text-xs font-semibold uppercase tracking-[0.16em] text-stone-500"
+                  >
+                    {formatDate(post.date, siteMetadata.locale)}
+                  </time>
+
+                  <h3 className="mt-3 font-sans text-xl font-semibold leading-tight text-stone-900">
+                    <Link
+                      href={'/blog/' + post.slug}
+                      className="transition hover:text-primary-600"
+                    >
+                      {post.title}
+                    </Link>
+                  </h3>
+
+                  <p className="mt-3 line-clamp-3 leading-7 text-stone-600">
+                    {post.summary}
+                  </p>
                 </div>
               </article>
             )
