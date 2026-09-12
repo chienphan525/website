@@ -6,8 +6,7 @@ import { formatDate } from 'pliny/utils/formatDate'
 
 export const metadata = genPageMetadata({
   title: 'Nhật ký',
-  description:
-    'Những câu chuyện nhỏ, những ngày bình thường, những điều mình đã đi qua.',
+  description: 'Những câu chuyện nhỏ, những ngày bình thường, những điều mình đã đi qua.',
 })
 
 export default function NhatKyPage() {
@@ -39,9 +38,7 @@ export default function NhatKyPage() {
                 <Link href={`/blog/${post.slug}`}>{post.title}</Link>
               </h2>
 
-              {post.summary && (
-                <p className="mt-4 leading-relaxed text-stone-600">{post.summary}</p>
-              )}
+              {post.summary && <p className="mt-4 leading-relaxed text-stone-600">{post.summary}</p>}
 
               <Link href={`/blog/${post.slug}`} className="cp-link mt-6 inline-block">
                 Đọc bài viết →
