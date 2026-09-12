@@ -28,7 +28,16 @@ export default function NhatKyPage() {
 
         <div className="grid gap-8 md:grid-cols-2">
           {posts.map((post) => (
-            <article key={post.slug} className="cp-card p-6">
+            <article key={post.slug} className="cp-card overflow-hidden">
+              {post.images?.[0] && (
+                <img
+                   src={post.images[0]}
+                   alt={post.title}
+                   className="aspect-[16/10] w-full object-cover"
+                />
+              )}
+
+              div className="p-6">
               <p className="text-xs uppercase tracking-wider text-stone-500">
                 {formatDate(post.date, 'vi-VN')}
               </p>
@@ -44,6 +53,7 @@ export default function NhatKyPage() {
               <Link href={`/blog/${post.slug}`} className="cp-link mt-6 inline-block">
                 Đọc bài viết →
               </Link>
+              </div>
             </article>
           ))}
         </div>
