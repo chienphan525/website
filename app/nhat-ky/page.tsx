@@ -12,7 +12,7 @@ export const metadata = genPageMetadata({
 export default function NhatKyPage() {
   const posts = allCoreContent(sortPosts(allBlogs)).filter(
     (post) => post.tags?.includes('Nhật ký')
-)
+  )
 
   return (
     <main className="px-5 py-16 sm:px-8 sm:py-20">
