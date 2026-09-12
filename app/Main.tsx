@@ -177,10 +177,7 @@ export default function Home({ posts }) {
                   </time>
 
                   <h3 className="mt-3 font-sans text-2xl font-semibold leading-tight text-stone-900 sm:text-3xl">
-                    <Link
-                      href={'/blog/' + post.slug}
-                      className="transition hover:text-primary-600"
-                    >
+                    <Link href={'/blog/' + post.slug} className="transition hover:text-primary-600">
                       {post.title}
                     </Link>
                   </h3>
@@ -188,9 +185,7 @@ export default function Home({ posts }) {
                   <p className="mt-4 line-clamp-3 leading-7 text-stone-600">{post.summary}</p>
 
                   <Link
-                    href={'/blog/' + post.slug}
-                    className="cp-link mt-6 inline-block"
-                  >
+                    <Link href={'/blog/' + post.slug} className="cp-link mt-6 inline-block">
                     Đọc bài viết →
                   </Link>
                 </div>
