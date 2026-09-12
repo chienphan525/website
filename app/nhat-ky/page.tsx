@@ -37,7 +37,7 @@ export default function NhatKyPage() {
                 />
               )}
 
-              div className="p-6">
+              <div className="p-6">
               <p className="text-xs uppercase tracking-wider text-stone-500">
                 {formatDate(post.date, 'vi-VN')}
               </p>
