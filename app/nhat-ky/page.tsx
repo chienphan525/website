@@ -31,28 +31,28 @@ export default function NhatKyPage() {
             <article key={post.slug} className="cp-card overflow-hidden">
               {post.images?.[0] && (
                 <img
-                   src={post.images[0]}
-                   alt={post.title}
-                   className="aspect-[16/10] w-full object-cover"
+                    src={post.images[0]}
+                    alt={post.title}
+                    className="aspect-[16/10] w-full object-cover"
                 />
               )}
 
               <div className="p-6">
-              <p className="text-xs uppercase tracking-wider text-stone-500">
-                {formatDate(post.date, 'vi-VN')}
-              </p>
+                <p className="text-xs uppercase tracking-wider text-stone-500">
+                  {formatDate(post.date, 'vi-VN')}
+                </p>
 
-              <h2 className="mt-3 font-serif text-2xl leading-snug text-stone-900">
-                <Link href={`/blog/${post.slug}`}>{post.title}</Link>
-              </h2>
+                <h2 className="mt-3 font-serif text-2xl leading-snug text-stone-900">
+                  <Link href={`/blog/${post.slug}`}>{post.title}</Link>
+                </h2>
 
-              {post.summary && (
-                <p className="mt-4 leading-relaxed text-stone-600">{post.summary}</p>
-              )}
+                {post.summary && (
+                  <p className="mt-4 leading-relaxed text-stone-600">{post.summary}</p>
+                )}
 
-              <Link href={`/blog/${post.slug}`} className="cp-link mt-6 inline-block">
-                Đọc bài viết →
-              </Link>
+                <Link href={`/blog/${post.slug}`} className="cp-link mt-6 inline-block">
+                  Đọc bài viết →
+                </Link>
               </div>
             </article>
           ))}
