@@ -76,7 +76,7 @@ export default function Home({ posts }) {
           })}
         </div>
       </section>
-            <section className="mx-auto max-w-6xl px-5 py-14 sm:px-8 sm:py-20">
+      <section className="mx-auto max-w-6xl px-5 py-14 sm:px-8 sm:py-20">
         <div className="mb-10 flex items-end justify-between gap-6">
           <div>
             <p className="cp-kicker text-primary-500">GIÁ TRỊ SỐNG</p>
@@ -120,17 +120,12 @@ export default function Home({ posts }) {
                   </time>
 
                   <h3 className="mt-3 font-sans text-xl font-semibold leading-tight text-stone-900">
-                    <Link
-                      href={'/blog/' + post.slug}
-                      className="transition hover:text-primary-600"
-                    >
+                    <Link href={'/blog/' + post.slug} className="transition hover:text-primary-600">
                       {post.title}
                     </Link>
                   </h3>
 
-                  <p className="mt-3 line-clamp-3 leading-7 text-stone-600">
-                    {post.summary}
-                  </p>
+                  <p className="mt-3 line-clamp-3 leading-7 text-stone-600">{post.summary}</p>
                 </div>
               </article>
             )
