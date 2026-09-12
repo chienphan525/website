@@ -31,9 +31,9 @@ export default function NhatKyPage() {
             <article key={post.slug} className="cp-card overflow-hidden">
               {post.images?.[0] && (
                 <img
-                    src={post.images[0]}
-                    alt={post.title}
-                    className="aspect-[16/10] w-full object-cover"
+                  src={post.images[0]}
+                  alt={post.title}
+                  className="aspect-[16/10] w-full object-cover"
                 />
               )}
 
