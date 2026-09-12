@@ -78,14 +78,15 @@ body {
   background: linear-gradient(135deg, #473b2d, #b69547);
 }
 .cp-link {
-  color: #a57611;
+  color: #ffd700;
   font-size: 0.82rem;
   font-weight: 800;
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 .cp-link:hover {
-  color: #73500a;
+  color: #ffd700;
+  text-shadow: 0 0 8px rgba(255, 215, 0, 0.35);
 }
 
 .cp-prose {
