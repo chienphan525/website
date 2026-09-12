@@ -27,7 +27,7 @@ export default function Home({ posts }) {
       <section className="mx-auto max-w-6xl px-5 py-14 sm:px-8 sm:py-20">
         <div className="mb-10 flex items-end justify-between gap-6">
           <div>
-            <p className="cp-kicker text-primary-500">NỘI DUNG NỔI BẬT</p>
+            <p className="cp-kicker text-[#ffd700]">NỘI DUNG NỔI BẬT</p>
             <h2 className="mt-2 font-sans text-4xl font-semibold text-stone-900 sm:text-5xl">
               Những điều mình muốn chia sẻ
             </h2>
@@ -80,7 +80,7 @@ export default function Home({ posts }) {
       <section className="mx-auto max-w-6xl px-5 py-14 sm:px-8 sm:py-20">
         <div className="mb-10 flex items-end justify-between gap-6">
           <div>
-            <p className="cp-kicker text-primary-500">GIÁ TRỊ SỐNG</p>
+            <p className="cp-kicker text-[#ffd700]">GIÁ TRỊ SỐNG</p>
             <h2 className="mt-2 font-sans text-4xl font-semibold text-stone-900 sm:text-5xl">
               Những điều đáng để ngẫm
             </h2>
@@ -136,7 +136,7 @@ export default function Home({ posts }) {
       <section className="mx-auto max-w-6xl px-5 py-14 sm:px-8 sm:py-20">
         <div className="mb-10 flex items-end justify-between gap-6">
           <div>
-            <p className="cp-kicker text-primary-500">CHIA SẺ HỮU ÍCH</p>
+            <p className="cp-kicker text-[#ffd700]">CHIA SẺ HỮU ÍCH</p>
             <h2 className="mt-2 font-sans text-4xl font-semibold text-stone-900 sm:text-5xl">
               Những điều có thể giúp bạn
             </h2>
