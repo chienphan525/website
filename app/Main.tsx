@@ -52,7 +52,7 @@ export default function Home({ posts }) {
                       className="aspect-[16/10] w-full object-cover transition duration-700 group-hover:scale-105"
                     />
                   ) : (
-                    <div className="cp-card-placeholder h-60 sm:h-72" />
+                    <div className="cp-card-placeholder aspect-[16/10] w-full" />
                   )}
                 </Link>
                 <div className="p-6 sm:p-7">
