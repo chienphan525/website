@@ -6,18 +6,18 @@ export default async function VideoSection() {
   if (!videos.length) return null
 
   return (
-    <section className="bg-stone-950 px-5 py-16 text-white sm:px-8 sm:py-20">
+    <section className="px-5 py-14 sm:px-8 sm:py-16">
       <div className="mx-auto max-w-6xl">
         <div className="mb-10 flex items-end justify-between gap-5">
           <div>
-            <p className="cp-kicker text-primary-400">CHIẾN PHAN TV</p>
-            <h2 className="mt-2 font-serif text-4xl sm:text-5xl">Video mới nhất</h2>
+            <p className="cp-kicker text-primary-600">CHIẾN PHAN TV</p>
+            <h2 className="mt-2 font-serif text-4xl text-stone-900 sm:text-5xl">Video mới nhất</h2>
           </div>
           <Link href="/videos" className="cp-link text-primary-400">
             Xem tất cả →
           </Link>
         </div>
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-x-8 gap-y-10 sm:grid-cols-2">
           {videos.map((video) => (
             <Link
               href={`https://www.youtube.com/watch?v=${video.id}`}
