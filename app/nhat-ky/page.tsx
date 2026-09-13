@@ -14,7 +14,7 @@ export default function NhatKyPage() {
 
   return (
     <main className="px-5 py-16 sm:px-8 sm:py-20">
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-[1088px]">
         <header className="mb-14 max-w-2xl">
           <p className="cp-kicker text-[#ffd700]">NHẬT KÝ</p>
           <h1 className="mt-3 font-serif text-5xl text-stone-900 sm:text-6xl">
