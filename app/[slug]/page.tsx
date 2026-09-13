@@ -9,7 +9,7 @@ type Props = {
 }
 
 export default async function AffiliateRedirectPage({ params }: Props) {
-  const { slug } = await params  
+  const { slug } = await params
   const link = await getAffiliateLink(slug)
 
   if (link) {
