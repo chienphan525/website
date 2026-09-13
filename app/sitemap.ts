@@ -23,10 +23,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     'ket-noi',
     'projects',
     'tags',
-    ].map((route) => ({
+  ].map((route) => ({
     url: `${siteUrl}/${route}`,
     lastModified: new Date().toISOString().split('T')[0],
-    }))
+  }))
 
   return [...routes, ...blogRoutes]
 }
