@@ -32,7 +32,7 @@ const layouts = {
   PostBanner,
 }
 
-export async function generateMetadata({ params,}: Props): Promise<Metadata | undefined> {
+export async function generateMetadata({ params }: Props): Promise<Metadata | undefined> {
   const { slug } = await params
   const post = allBlogs.find((p) => p.slug === slug)
 
