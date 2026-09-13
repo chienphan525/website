@@ -5,6 +5,7 @@ const headerNavLinks = [
   { href: '/gia-tri-song', title: 'Giá trị sống' },
   { href: '/review', title: 'Review' },
   { href: '/san-pham', title: 'Sản phẩm' },
+  { href: '/videos', title: 'Video' },
   { href: '/ket-noi', title: 'Kết nối' },
 ]
 
