@@ -25,9 +25,7 @@ export default function SanPhamPage() {
 
         <div className="grid gap-8 md:grid-cols-2">
           <article className="cp-card p-6">
-            <h2 className="font-serif text-2xl text-stone-900">
-              Sản phẩm mình đang dùng
-            </h2>
+            <h2 className="font-serif text-2xl text-stone-900">Sản phẩm mình đang dùng</h2>
 
             <p className="mt-4 leading-relaxed text-stone-600">
               Những món đồ mình đang sử dụng trong cuộc sống và công việc hằng ngày.
@@ -35,9 +33,7 @@ export default function SanPhamPage() {
           </article>
 
           <article className="cp-card p-6">
-            <h2 className="font-serif text-2xl text-stone-900">
-              Sản phẩm mình đề xuất
-            </h2>
+            <h2 className="font-serif text-2xl text-stone-900">Sản phẩm mình đề xuất</h2>
 
             <p className="mt-4 leading-relaxed text-stone-600">
               Những sản phẩm mình thấy thực sự hữu ích và có thể phù hợp với bạn.
