@@ -132,6 +132,11 @@ module.exports = () => {
           destination: '/:path/feed.xml',
           permanent: true,
         },
+        {
+        source: '/blog/:path*',
+        destination: '/:path*',
+        permanent: true,
+        },
       ]
     },
   })
