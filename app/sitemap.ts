@@ -20,6 +20,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     'gia-tri-song',
     'review',
     'san-pham',
+    'videos',
     'ket-noi',
     'projects',
     'tags',
