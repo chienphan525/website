@@ -12,13 +12,13 @@ export default async function AffiliateRedirectPage({ params }: Props) {
   const { slug } = await params
 
   if (link) {
-  redirect(link.url)
+    redirect(link.url)
   }
 
   const post = allBlogs.find((p) => p.slug === slug)
 
   if (post) {
-  permanentRedirect(`/blog/${post.slug}`)
+    permanentRedirect(`/blog/${post.slug}`)
   }
 
   notFound()
