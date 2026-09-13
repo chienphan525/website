@@ -17,8 +17,8 @@ export default function KetNoiPage() {
           </h1>
 
           <p className="mt-5 text-lg leading-relaxed text-stone-600">
-            Nếu những điều mình chia sẻ hữu ích với bạn, chúng ta có thể gặp nhau
-            trên các kênh của mình.
+            Nếu những điều mình chia sẻ hữu ích với bạn, chúng ta có thể gặp nhau trên các kênh của
+            mình.
           </p>
 
           <div className="mt-6 h-0.5 w-12 bg-[#ffd700]" />
