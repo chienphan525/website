@@ -69,9 +69,7 @@ export default function KetNoiPage() {
 
           <a href="/" className="cp-card group p-6 transition hover:border-[#ffd700]">
             <p className="cp-kicker text-[#ffd700]">WEBSITE</p>
-            <h2 className="mt-3 font-serif text-2xl text-stone-900">
-              chienphan.com
-            </h2>
+            <h2 className="mt-3 font-serif text-2xl text-stone-900">chienphan.com</h2>
             <p className="mt-4 leading-relaxed text-stone-600">
               Đây là nơi mình tập hợp những điều muốn lưu lại, chia sẻ và xây dựng lâu dài.
             </p>
