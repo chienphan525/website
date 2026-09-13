@@ -32,9 +32,7 @@ const layouts = {
   PostBanner,
 }
 
-export async function generateMetadata({
-  params,
-}: Props): Promise<Metadata | undefined> {
+export async function generateMetadata({ params,}: Props): Promise<Metadata | undefined> {
   const { slug } = await params
   const post = allBlogs.find((p) => p.slug === slug)
 
@@ -146,17 +144,8 @@ export default async function Page({ params }: Props) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <Layout
-        content={mainContent}
-        authorDetails={authorDetails}
-        next={next}
-        prev={prev}
-      >
-        <MDXLayoutRenderer
-          code={post.body.code}
-          components={components}
-          toc={post.toc}
-        />
+      <Layout content={mainContent} authorDetails={authorDetails} next={next} prev={prev}>
+        <MDXLayoutRenderer code={post.body.code} components={components} toc={post.toc} />
       </Layout>
     </>
   )
