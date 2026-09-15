@@ -99,6 +99,53 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               })();
             `}
           </Script>
+          <Script id="tawk-avatar" strategy="afterInteractive">
+            {`
+              (function () {
+                const AVATAR_URL = 'https://chienphan.com/static/chienphan/avatar-tawk.png';
+
+                function applyTawkAvatar() {
+                  const iframe = document.querySelector('iframe[title="Widget chat"]');
+                  if (!iframe) return;
+
+                  const doc = iframe.contentDocument;
+                  if (!doc) return;
+
+                  const button = doc.querySelector('.tawk-button-circle');
+                  if (!button) return;
+
+                  let avatar = button.querySelector('.chienphan-tawk-avatar');
+
+                  if (!avatar) {
+                    avatar = doc.createElement('img');
+                    avatar.className = 'chienphan-tawk-avatar';
+                    avatar.src = AVATAR_URL;
+                    avatar.alt = 'Chiến Phan';
+                    avatar.style.cssText = [
+                      'width:100%',
+                      'height:100%',
+                      'object-fit:cover',
+                      'border-radius:50%',
+                      'display:block'
+                    ].join(';');
+
+                    button.innerHTML = '';
+                    button.appendChild(avatar);
+                  }
+                }
+
+                const observer = new MutationObserver(applyTawkAvatar);
+
+                observer.observe(document.documentElement, {
+                  childList: true,
+                  subtree: true
+                });
+
+                setInterval(applyTawkAvatar, 1000);
+                applyTawkAvatar();
+              })();
+            `}
+          </Script>
           <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} />
           <SectionContainer>
             <div className="flex min-h-screen flex-col justify-between font-sans">
