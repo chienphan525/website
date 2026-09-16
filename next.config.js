@@ -93,6 +93,11 @@ module.exports = () => {
     async redirects() {
       return [
         {
+          source: '/home',
+          destination: '/',
+          permanent: true,
+        },
+        {
           source: '/blog/bicep-part-one',
           destination: '/blog/bicep/part-one',
           permanent: true,
