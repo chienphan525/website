@@ -17,11 +17,7 @@ const MobileNav = () => {
   return (
     <>
       {/* Nút menu */}
-      <button
-        aria-label="Toggle Menu"
-        onClick={onToggleNav}
-        className="relative z-[60] sm:hidden"
-      >
+      <button aria-label="Toggle Menu" onClick={onToggleNav} className="relative z-[60] sm:hidden">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
@@ -37,38 +33,22 @@ const MobileNav = () => {
         </svg>
       </button>
 
-      {/* =========================
-          CÁNH QUẠT MENU
-          ========================= */}
+      {/* Cánh quạt menu */}
       <div
         className={`fixed left-0 top-0 z-50 w-full ${
-          navShow
-            ? 'opacity-100 rotate-0'
-            : 'pointer-events-none opacity-0 -rotate-90'
+          navShow ? 'rotate-0 opacity-100' : 'pointer-events-none -rotate-90 opacity-0'
         }`}
         style={{
           height: '50vh',
           backgroundColor: '#00000088',
           borderBottomLeftRadius: '100% 75%',
-
-          // Tâm quay chính là vị trí nút menu
           transformOrigin: 'calc(100% - 36px) 24px',
-
-          // Nhanh lúc đầu → chậm dần → dừng
-          transition:
-            'transform 500ms cubic-bezier(0.22, 1, 0.36, 1), opacity 300ms ease-out',
+          transition: 'transform 500ms cubic-bezier(0.22, 1, 0.36, 1), opacity 300ms ease-out',
         }}
       >
-        {/* =========================
-            NỘI DUNG MENU
-            Không quay theo cánh quạt
-            ========================= */}
+        {/* Nội dung menu */}
         <div
-          className={`absolute inset-0 ${
-            navShow
-              ? 'opacity-100'
-              : 'opacity-0'
-          }`}
+          className={`absolute inset-0 ${navShow ? 'opacity-100' : 'opacity-0'}`}
           style={{
             transition: 'opacity 250ms ease-out',
           }}
@@ -98,10 +78,7 @@ const MobileNav = () => {
           {/* Các mục menu */}
           <nav className="mt-16 w-full pr-6">
             {headerNavLinks.map((link) => (
-              <div
-                key={link.title}
-                className="py-2 text-right"
-              >
+              <div key={link.title} className="py-2 text-right">
                 <Link
                   href={link.href}
                   className="text-sm font-light uppercase tracking-[0.18em] text-white"
