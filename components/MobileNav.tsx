@@ -49,8 +49,7 @@ const MobileNav = () => {
             clipPath: navShow
               ? 'polygon(100% 0, 100% 100%, 0 100%, 12% 70%, 28% 45%, 52% 25%, 76% 10%)'
               : 'polygon(100% 0, 100% 8%, 96% 6%, 98% 3%)',
-            transition:
-              'clip-path 500ms cubic-bezier(0.22, 1, 0.36, 1), opacity 300ms ease-out',
+            transition: 'clip-path 500ms cubic-bezier(0.22, 1, 0.36, 1), opacity 300ms ease-out',
           }}
         />
 
@@ -97,11 +96,8 @@ const MobileNav = () => {
                 key={link.title}
                 className="absolute right-0 top-0"
                 style={{
-                  transform: navShow
-                    ? `translate(${-x}px, ${y}px)`
-                    : 'translate(0, 0)',
-                  transition:
-                    'transform 500ms cubic-bezier(0.22, 1, 0.36, 1)',
+                  transform: navShow ? `translate(${-x}px, ${y}px)` : 'translate(0, 0)',
+                  transition: 'transform 500ms cubic-bezier(0.22, 1, 0.36, 1)',
                   transitionDelay: `${index * 20}ms`,
                 }}
               >
