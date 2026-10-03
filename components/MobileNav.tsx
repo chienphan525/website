@@ -74,8 +74,16 @@ const MobileNav = () => {
 
         {/* Các mục menu */}
         <nav className="mt-16 w-full pr-6">
-          {headerNavLinks.map((link) => (
-            <div key={link.title} className="py-2 text-right">
+          {headerNavLinks.map((link, index) => (
+            <div
+              key={link.title}
+              className="py-2 text-right"
+              style={{
+                opacity: navShow ? 1 : 0,
+                transform: navShow ? 'translateY(0)' : 'translateY(-35px)',
+                transition: `opacity 350ms ease-out ${150 + index * 55}ms, transform 500ms cubic-bezier(0.22, 1, 0.36, 1) ${150 + index * 55}ms`,
+              }}
+            >
               <Link
                 href={link.href}
                 className="text-sm font-light uppercase tracking-[0.18em] text-white"
