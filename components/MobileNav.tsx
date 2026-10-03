@@ -33,31 +33,27 @@ const MobileNav = () => {
         </svg>
       </button>
 
-      {/* Vùng menu */}
+      {/* Nguyên khối menu hình quạt */}
       <div
-        className={`fixed inset-0 z-50 sm:hidden ${
-          navShow ? 'pointer-events-auto' : 'pointer-events-none'
+        className={`fixed left-0 top-0 z-50 w-full transition-all duration-500 ${
+          navShow ? 'rotate-0 opacity-100' : 'pointer-events-none rotate-90 opacity-0'
         }`}
-      >
-        {/* Nền tối hình quạt */}
-        <div
-          className={`absolute right-0 top-0 h-[50vh] w-full origin-[calc(100%-36px)_24px] overflow-hidden transition-all duration-500 ${
-            navShow ? 'opacity-100' : 'opacity-0'
-          }`}
-          style={{
-            backgroundColor: '#00000088',
-            clipPath: navShow
-              ? 'polygon(100% 0, 100% 100%, 0 100%, 12% 70%, 28% 45%, 52% 25%, 76% 10%)'
-              : 'polygon(100% 0, 100% 8%, 96% 6%, 98% 3%)',
-            transition: 'clip-path 500ms cubic-bezier(0.22, 1, 0.36, 1), opacity 300ms ease-out',
-          }}
-        />
+        style={{
+          height: '50vh',
+          backgroundColor: '#00000088',
+          borderBottomLeftRadius: '100% 75%',
 
+          // Tâm quay đúng tại nút menu bên phải
+          transformOrigin: 'calc(100% - 36px) 24px',
+
+          // Mở nhanh → chậm dần → dừng
+          transitionTimingFunction: 'cubic-bezier(0.22, 1, 0.36, 1)',
+        }}
+      >
         {/* Nút X */}
         <button
-          className={`absolute right-5 top-1 z-10 h-8 w-8 transition-opacity duration-300 ${
-            navShow ? 'opacity-100' : 'opacity-0'
-          }`}
+          className="absolute right-5 h-8 w-8"
+          style={{ top: '4px' }}
           aria-label="Close Menu"
           onClick={onToggleNav}
         >
@@ -70,47 +66,25 @@ const MobileNav = () => {
           >
             <path
               fillRule="evenodd"
-              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 011.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
               clipRule="evenodd"
             />
           </svg>
         </button>
 
-        {/* Các nan quạt */}
-        <nav className="absolute right-6 top-12 h-[calc(50vh-48px)] w-[90%]">
-          {headerNavLinks.map((link, index) => {
-            const total = headerNavLinks.length
-            const progress = total <= 1 ? 0 : index / (total - 1)
-
-            // Góc xòe từ gần ngang sang gần dọc
-            const angle = progress * 82
-
-            // Bán kính mỗi nan
-            const radius = 42 + progress * 8
-
-            const x = Math.cos((angle * Math.PI) / 180) * radius
-            const y = Math.sin((angle * Math.PI) / 180) * radius
-
-            return (
-              <div
-                key={link.title}
-                className="absolute right-0 top-0"
-                style={{
-                  transform: navShow ? `translate(${-x}px, ${y}px)` : 'translate(0, 0)',
-                  transition: 'transform 500ms cubic-bezier(0.22, 1, 0.36, 1)',
-                  transitionDelay: `${index * 20}ms`,
-                }}
+        {/* Các mục menu */}
+        <nav className="mt-16 w-full pr-6">
+          {headerNavLinks.map((link) => (
+            <div key={link.title} className="py-2 text-right">
+              <Link
+                href={link.href}
+                className="text-sm font-light uppercase tracking-[0.18em] text-white"
+                onClick={onToggleNav}
               >
-                <Link
-                  href={link.href}
-                  onClick={onToggleNav}
-                  className="block whitespace-nowrap py-2 text-right text-sm font-light uppercase tracking-[0.18em] text-white"
-                >
-                  {link.title}
-                </Link>
-              </div>
-            )
-          })}
+                {link.title}
+              </Link>
+            </div>
+          ))}
         </nav>
       </div>
     </>
