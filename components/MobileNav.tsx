@@ -36,7 +36,7 @@ const MobileNav = () => {
       {/* Nguyên khối menu hình quạt */}
       <div
         className={`fixed left-0 top-0 z-50 w-full transition-all duration-500 ${
-          navShow ? 'rotate-0 opacity-100' : 'pointer-events-none rotate-90 opacity-0'
+          navShow ? 'rotate-0 opacity-100' : 'pointer-events-none -rotate-90 opacity-0'
         }`}
         style={{
           height: '50vh',
