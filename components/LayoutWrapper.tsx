@@ -7,10 +7,6 @@ interface Props {
   children: ReactNode
 }
 
-const inter = Inter({
-  subsets: ['latin'],
-})
-
 const LayoutWrapper = ({ children }: Props) => {
   return (
     <SectionContainer>
