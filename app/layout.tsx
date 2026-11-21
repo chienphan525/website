@@ -1,7 +1,7 @@
 import 'css/tailwind.css'
 import 'pliny/search/algolia.css'
 
-import { Be_Vietnam_Pro } from 'next/font/google'
+import { Montserrat } from 'next/font/google'
 import { Analytics, AnalyticsConfig } from 'pliny/analytics'
 import { SearchProvider, SearchConfig } from 'pliny/search'
 import Header from '@/components/Header'
@@ -14,10 +14,10 @@ import { Analytics as VercelAnalytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import Script from 'next/script'
 
-const be_vietnam_pro = Be_Vietnam_Pro({
+const montserrat = Montserrat({
   subsets: ['vietnamese', 'latin'],
   display: 'swap',
-  variable: '--font-be-vietnam-pro',
+  variable: '--font-montserrat',
   weight: ['400', '500', '600', '700', '800'],
 })
 
@@ -65,7 +65,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang={siteMetadata.language}
-      className={`${be_vietnam_pro.variable} scroll-smooth`}
+      className={`${montserrat.variable} scroll-smooth`}
       suppressHydrationWarning
     >
       {/*<link rel="apple-touch-icon" sizes="76x76" href="/static/favicons/apple-touch-icon.png"/>*/}
