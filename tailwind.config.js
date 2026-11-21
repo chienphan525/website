@@ -22,7 +22,8 @@ module.exports = {
         14: '3.5rem',
       },
       fontFamily: {
-  sans: ['var(--font-be-vietnam-pro)', ...fontFamily.sans],
+        sans: ['var(--font-montserrat)', 'sans-serif'],
+        serif: ['var(--font-montserrat)', 'sans-serif'],
       },
       colors: {
         primary: colors.amber,
