@@ -57,14 +57,25 @@ Tóm tắt ý chính và đưa ra lời khuyên cuối bài.`
 function markdownToEditorHtml(markdown: string) {
   if (/<\/?[a-z][\s\S]*>/i.test(markdown)) return markdown
 
-  const inline = (text: string) =>
-    text
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/\[([^\]]+)]\((https?:\/\/[^)\s]+)\)/g, '<a href="$2">$1</a>')
-      .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
-      .replace(/\*([^*]+)\*/g, '<em>$1</em>')
+  const body = post.body
+    .replace(
+      /<p>\s*<img\s+src=["']([^"']+)["']\s+alt=["']([^"']*)["']\s*\/?>\s*<\/p>/gi,
+      (_, src, alt) => `![${alt || 'Hình minh họa'}](${src})`
+    )
+    .replace(/<br\s*\/?>/gi, '<br />')
+    // Tách các khối HTML và ảnh Markdown thành các block riêng.
+    .replace(
+      /<\/(p|h[1-6]|ul|ol|blockquote|pre|table|div)>[ \t]*(?=<(?:p|h[1-6]|ul|ol|blockquote|pre|table|div)\b)/gi,
+      '$&\n\n'
+    )
+    .replace(
+      /<\/(p|h[1-6]|ul|ol|blockquote|pre|table|div)>[ \t]*(?=!\[)/gi,
+      '$&\n\n'
+    )
+    .replace(
+      /(!\[[^\]]*\]\([^)]+\))[ \t]*(?=<(?:p|h[1-6]|ul|ol|blockquote|pre|table|div)\b)/gi,
+      '$1\n\n'
+    )
 
   return markdown
     .trim()
@@ -132,6 +143,8 @@ function RichTextEditor({
     if (editor && content !== lastEditorHtml.current) {
       editor.commands.setContent(markdownToEditorHtml(content), { emitUpdate: false })
       lastEditorHtml.current = editor.getHTML()
+      // Đồng bộ nội dung ngay cả khi người dùng chưa chạm vào vùng soạn thảo.
+      onChangeRef.current(lastEditorHtml.current)
     }
   }, [content, editor])
 
