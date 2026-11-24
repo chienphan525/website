@@ -477,13 +477,14 @@ function toMdx(post: PostForm) {
       '$&\n\n'
     )
     .replace(
-      /<\/(p|h[1-6]|ul|ol|blockquote|pre|table|div)>[ \t]*(?=!\\[)/gi,
+      /<\/(p|h[1-6]|ul|ol|blockquote|pre|table|div)>[ \t]*(?=!\[)/gi,
       '$&\n\n'
     )
     .replace(
       /(!\[[^\]]*\]\([^)]+\))[ \t]*(?=<(?:p|h[1-6]|ul|ol|blockquote|pre|table|div)\b)/gi,
       '$1\n\n'
     )
+
   return [
     '---',
     `title: ${quote(post.title)}`,
