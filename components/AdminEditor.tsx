@@ -57,26 +57,6 @@ Tóm tắt ý chính và đưa ra lời khuyên cuối bài.`
 function markdownToEditorHtml(markdown: string) {
   if (/<\/?[a-z][\s\S]*>/i.test(markdown)) return markdown
 
-  const body = post.body
-    .replace(
-      /<p>\s*<img\s+src=["']([^"']+)["']\s+alt=["']([^"']*)["']\s*\/?>\s*<\/p>/gi,
-      (_, src, alt) => `![${alt || 'Hình minh họa'}](${src})`
-    )
-    .replace(/<br\s*\/?>/gi, '<br />')
-    // Tách các khối HTML và ảnh Markdown thành các block riêng.
-    .replace(
-      /<\/(p|h[1-6]|ul|ol|blockquote|pre|table|div)>[ \t]*(?=<(?:p|h[1-6]|ul|ol|blockquote|pre|table|div)\b)/gi,
-      '$&\n\n'
-    )
-    .replace(
-      /<\/(p|h[1-6]|ul|ol|blockquote|pre|table|div)>[ \t]*(?=!\[)/gi,
-      '$&\n\n'
-    )
-    .replace(
-      /(!\[[^\]]*\]\([^)]+\))[ \t]*(?=<(?:p|h[1-6]|ul|ol|blockquote|pre|table|div)\b)/gi,
-      '$1\n\n'
-    )
-
   return markdown
     .trim()
     .split(/\n{2,}/)
@@ -492,7 +472,18 @@ function toMdx(post: PostForm) {
       (_, src, alt) => `![${alt || 'Hình minh họa'}](${src})`
     )
     .replace(/<br\s*\/?>/gi, '<br />')
-
+    .replace(
+      /<\/(p|h[1-6]|ul|ol|blockquote|pre|table|div)>[ \t]*(?=<(?:p|h[1-6]|ul|ol|blockquote|pre|table|div)\b)/gi,
+      '$&\n\n'
+    )
+    .replace(
+      /<\/(p|h[1-6]|ul|ol|blockquote|pre|table|div)>[ \t]*(?=!\\[)/gi,
+      '$&\n\n'
+    )
+    .replace(
+      /(!\[[^\]]*\]\([^)]+\))[ \t]*(?=<(?:p|h[1-6]|ul|ol|blockquote|pre|table|div)\b)/gi,
+      '$1\n\n'
+    )
   return [
     '---',
     `title: ${quote(post.title)}`,
