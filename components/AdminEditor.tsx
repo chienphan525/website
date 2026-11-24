@@ -54,6 +54,19 @@ Bạn có thể dùng **chữ đậm**, *chữ nghiêng* và [một liên kết]
 
 Tóm tắt ý chính và đưa ra lời khuyên cuối bài.`
 
+function inline(text: string) {
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.+?)\*/g, '<em>$1</em>')
+    .replace(
+      /\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g,
+      '<a href="$2">$1</a>'
+    )
+}
+
 function markdownToEditorHtml(markdown: string) {
   if (/<\/?[a-z][\s\S]*>/i.test(markdown)) return markdown
 
