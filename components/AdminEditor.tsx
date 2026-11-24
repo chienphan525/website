@@ -61,9 +61,7 @@ function inline(text: string) {
     .replace(/>/g, '&gt;')
     .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
     .replace(/\*(.+?)\*/g, '<em>$1</em>')
-    .replace(
-      /\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g, '<a href="$2">$1</a>'
-    )
+    .replace(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g, '<a href="$2">$1</a>')
 }
 
 function markdownToEditorHtml(markdown: string) {
@@ -488,9 +486,7 @@ function toMdx(post: PostForm) {
       /<\/(p|h[1-6]|ul|ol|blockquote|pre|table|div)>[ \t]*(?=<(?:p|h[1-6]|ul|ol|blockquote|pre|table|div)\b)/gi,
       '$&\n\n'
     )
-    .replace(
-      /<\/(p|h[1-6]|ul|ol|blockquote|pre|table|div)>[ \t]*(?=!\[)/gi, '$&\n\n'
-    )
+    .replace(/<\/(p|h[1-6]|ul|ol|blockquote|pre|table|div)>[ \t]*(?=!\[)/gi, '$&\n\n')
     .replace(
       /(!\[[^\]]*\]\([^)]+\))[ \t]*(?=<(?:p|h[1-6]|ul|ol|blockquote|pre|table|div)\b)/gi,
       '$1\n\n'
