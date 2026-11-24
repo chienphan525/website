@@ -132,6 +132,9 @@ function RichTextEditor({
     if (editor && content !== lastEditorHtml.current) {
       editor.commands.setContent(markdownToEditorHtml(content), { emitUpdate: false })
       lastEditorHtml.current = editor.getHTML()
+
+      // Đồng bộ nội dung ngay cả khi người dùng chưa chạm vào vùng soạn thảo.
+      onChangeRef.current(lastEditorHtml.current)
     }
   }, [content, editor])
 
@@ -468,7 +471,7 @@ function toMdx(post: PostForm) {
     .split(',')
     .map((tag) => tag.trim())
     .filter(Boolean)
-
+  
   const body = post.body
     .replace(
       /<p>\s*<img\s+src=["']([^"']+)["']\s+alt=["']([^"']*)["']\s*\/?>\s*<\/p>/gi,
@@ -479,6 +482,19 @@ function toMdx(post: PostForm) {
       (_, src, alt) => `![${alt || 'Hình minh họa'}](${src})`
     )
     .replace(/<br\s*\/?>/gi, '<br />')
+    // Tách các khối HTML và ảnh Markdown thành các block riêng.
+    .replace(
+      /<\/(p|h[1-6]|ul|ol|blockquote|pre|table|div)>[ \t]*(?=<(?:p|h[1-6]|ul|ol|blockquote|pre|table|div)\b)/gi,
+      '$&\n\n'
+    )
+    .replace(
+      /<\/(p|h[1-6]|ul|ol|blockquote|pre|table|div)>[ \t]*(?=!\\[)/gi,
+      '$&\n\n'
+    )
+    .replace(
+      /(!\[[^\]]*\]\([^)]+\))[ \t]*(?=<(?:p|h[1-6]|ul|ol|blockquote|pre|table|div)\b)/gi,
+      '$1\n\n'
+    )
 
   return [
     '---',
