@@ -466,7 +466,6 @@ function quote(text: string) {
   return JSON.stringify(text)
 }
 
-
 function toMdx(post: PostForm) {
   const tags = post.tags
     .split(',')
