@@ -474,12 +474,20 @@ function toMdx(post: PostForm) {
 
   const body = post.body
     .replace(
-      /<p>\s*<img\s+src=["']([^"']+)["']\s+alt=["']([^"']*)["']\s*\/?>\s*<\/p>/gi,
-      (_, src, alt) => `![${alt || 'Hình minh họa'}](${src})`
+      /<p>\s*<img\b([^>]*)>\s*<\/p>/gi,
+      (_, attrs) => {
+        const src = attrs.match(/\bsrc\s*=\s*(["'])(.*?)\1/i)?.[2]
+        const alt = attrs.match(/\balt\s*=\s*(["'])(.*?)\1/i)?.[2] || 'Hình minh họa'
+        return src ? `![${alt}](${src})` : `<p><img${attrs}></p>`
+      }
     )
     .replace(
-      /<img\s+src=["']([^"']+)["']\s+alt=["']([^"']*)["']\s*\/?>/gi,
-      (_, src, alt) => `![${alt || 'Hình minh họa'}](${src})`
+      /<img\b([^>]*)>/gi,
+      (match, attrs) => {
+        const src = attrs.match(/\bsrc\s*=\s*(["'])(.*?)\1/i)?.[2]
+        const alt = attrs.match(/\balt\s*=\s*(["'])(.*?)\1/i)?.[2] || 'Hình minh họa'
+        return src ? `![${alt}](${src})` : match
+      }
     )
     .replace(/<br\s*\/?>/gi, '<br />')
     .replace(
