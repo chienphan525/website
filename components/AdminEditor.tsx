@@ -466,6 +466,7 @@ function quote(text: string) {
   return JSON.stringify(text)
 }
 
+
 function toMdx(post: PostForm) {
   const tags = post.tags
     .split(',')
@@ -473,22 +474,16 @@ function toMdx(post: PostForm) {
     .filter(Boolean)
 
   const body = post.body
-    .replace(
-      /<p>\s*<img\b([^>]*)>\s*<\/p>/gi,
-      (_, attrs) => {
-        const src = attrs.match(/\bsrc\s*=\s*(["'])(.*?)\1/i)?.[2]
-        const alt = attrs.match(/\balt\s*=\s*(["'])(.*?)\1/i)?.[2] || 'Hình minh họa'
-        return src ? `![${alt}](${src})` : `<p><img${attrs}></p>`
-      }
-    )
-    .replace(
-      /<img\b([^>]*)>/gi,
-      (match, attrs) => {
-        const src = attrs.match(/\bsrc\s*=\s*(["'])(.*?)\1/i)?.[2]
-        const alt = attrs.match(/\balt\s*=\s*(["'])(.*?)\1/i)?.[2] || 'Hình minh họa'
-        return src ? `![${alt}](${src})` : match
-      }
-    )
+    .replace(/<p>\s*<img\b([^>]*)>\s*<\/p>/gi, (_, attrs) => {
+      const src = attrs.match(/\bsrc\s*=\s*(["'])(.*?)\1/i)?.[2]
+      const alt = attrs.match(/\balt\s*=\s*(["'])(.*?)\1/i)?.[2] || 'Hình minh họa'
+      return src ? `![${alt}](${src})` : `<p><img${attrs}></p>`
+    })
+    .replace(/<img\b([^>]*)>/gi, (match, attrs) => {
+      const src = attrs.match(/\bsrc\s*=\s*(["'])(.*?)\1/i)?.[2]
+      const alt = attrs.match(/\balt\s*=\s*(["'])(.*?)\1/i)?.[2] || 'Hình minh họa'
+      return src ? `![${alt}](${src})` : match
+    })
     .replace(/<br\s*\/?>/gi, '<br />')
     .replace(
       /<\/(p|h[1-6]|ul|ol|blockquote|pre|table|div)>[ \t]*(?=<(?:p|h[1-6]|ul|ol|blockquote|pre|table|div)\b)/gi,
