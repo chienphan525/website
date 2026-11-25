@@ -405,10 +405,6 @@ body::-webkit-scrollbar-thumb {
   border-radius: 50px;
 }
 
-.cp-prose img:first-child {
-  display: none;
-}
-
 .cp-post .cp-prose > p:first-child {
   display: none;
 }
